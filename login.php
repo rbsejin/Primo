@@ -1,107 +1,9 @@
 <!doctype html>
 <html lang="zxx">
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Watch shop | eCommers</title>
-    <meta name="description" content="">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="manifest" href="site.webmanifest">
-    <link rel="shortcut icon" type="image/x-icon" href="assets/img/favicon.ico">
-
-    <!-- CSS here -->
-        <link rel="stylesheet" href="assets/css/bootstrap.min.css">
-        <link rel="stylesheet" href="assets/css/owl.carousel.min.css">
-        <link rel="stylesheet" href="assets/css/flaticon.css">
-        <link rel="stylesheet" href="assets/css/slicknav.css">
-        <link rel="stylesheet" href="assets/css/animate.min.css">
-        <link rel="stylesheet" href="assets/css/magnific-popup.css">
-        <link rel="stylesheet" href="assets/css/fontawesome-all.min.css">
-        <link rel="stylesheet" href="assets/css/themify-icons.css">
-        <link rel="stylesheet" href="assets/css/slick.css">
-        <link rel="stylesheet" href="assets/css/nice-select.css">
-        <link rel="stylesheet" href="assets/css/style.css">
-</head>
-<body>
-    <header>
-        <!-- Header Start -->
-        <div class="header-area">
-            <div class="main-header header-sticky">
-                <div class="container-fluid">
-                    <div class="menu-wrapper">
-                        <!-- Logo -->
-                        <div class="logo">
-                            <a href="index.html"><img src="assets/img/logo/logo.png" alt=""></a>
-                        </div>
-                        <!-- Main-menu -->
-                        <div class="main-menu d-none d-lg-block">
-                            <nav>
-                                <ul id="navigation">
-                                    <li><a href="#">교하프리모소개</a>
-                                        <ul class="submenu">
-                                            <li><a href="#">편한교복</a></li>
-                                            <li><a href="#">좋은품질</a></li>
-                                            <li><a href="#">착한서비스</a></li>
-                                        </ul>
-                                    </li>
-
-                                    <li><a href="#">라인업</a>
-                                        <ul class="submenu">
-                                            <li><a href="#">편한교복스타일</a></li>
-                                            <li><a href="#">정장하복스타일</a></li>
-                                            <li><a href="#">정장동복 스타일</a></li>
-                                        </ul>
-                                    </li>
-
-                                    <li><a href="#">마켓</a>
-                                        <ul class="submenu">
-                                            <li><a href="#">남학생복</a></li>
-                                            <li><a href="#">여학생복</a></li>
-                                            <li><a href="#">생활복</a></li>
-                                            <li><a href="#">체육복</a></li>
-                                        </ul>
-                                    </li>
-
-                                    <li><a href="#">매장/고객센터</a>
-                                        <ul class="submenu">
-                                            <li><a href="#">공지사항</a></li>
-                                            <li><a href="#">일정</a></li>
-                                            <li><a href="#">자주묻는질문</a></li>
-                                            <li><a href="#">AS문의</a></li>
-                                        </ul>
-                                    </li>
-
-                                    <li><a href="#">갤러리</a>
-                                        <ul class="submenu">
-                                            <li><a href="#">협찬</a></li>
-                                            <li><a href="#">패션왕</a></li>
-                                        </ul>
-                                    </li>
-                                </ul>
-                            </nav>
-                        </div>
-                        <!-- Header Right -->
-                        <div class="header-right">
-                            <ul>
-                                <!-- <li>
-                                    <div class="nav-search search-switch">
-                                        <span class="flaticon-search"></span>
-                                    </div>
-                                </li> -->
-                                <li> <a href="login.html"><span class="flaticon-user"></span></a></li>
-                                <li><a href="cart.html"><span class="flaticon-shopping-cart"></span></a> </li>
-                            </ul>
-                        </div>
-                    </div>
-                    <!-- Mobile Menu -->
-                    <div class="col-12">
-                        <div class="mobile_menu d-block d-lg-none"></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- Header End -->
-    </header>
+    <?php
+    include_once('header.php');
+    ?>
+    
     <main>
         <!-- Hero Area Start-->
         <div class="slider-area ">
@@ -127,7 +29,7 @@
                             <div class="login_part_text_iner">
                                 <h2>처음이신가요?</h2>
                                 <p>회원으로 가입하시면 다양한 정보와 혜택을 누릴 수 있습니다.</p>
-                                <a href="join.html" class="btn_3">회원가입</a>
+                                <a href="join.php" class="btn_3">회원가입</a>
                             </div>
                         </div>
                     </div>
@@ -136,9 +38,9 @@
                             <div class="login_part_form_iner">
                                 <h3>환영합니다!<br>
                                     로그인하시면 더 편리하게 이용하실 수 있습니다.</h3>
-                                <form class="row contact_form" action="#" method="post" novalidate="novalidate">
+                                <form class="row contact_form" action="loginok.php" method="post" novalidate="novalidate">
                                     <div class="col-md-12 form-group p_star">
-                                        <input type="text" class="form-control" id="name" name="name" value=""
+                                        <input type="text" class="form-control" id="id" name="id" value=""
                                             placeholder="아이디를 입력하세요.">
                                     </div>
                                     <div class="col-md-12 form-group p_star">
@@ -146,15 +48,15 @@
                                             placeholder="비밀번호를 입력하세요.">
                                     </div>
                                     <div class="col-md-12 form-group">
-                                        <div class="creat_account d-flex align-items-center">
+                                        <!-- <div class="creat_account d-flex align-items-center">
                                             <input type="checkbox" id="f-option" name="selector">
                                             <label for="f-option">아이디 저장</label>
-                                        </div>
+                                        </div> -->
                                         <button type="submit" value="submit" class="btn_3">
                                             로그인
                                         </button>
-                                        <a class="lost_pass" href="#">아이디 찾기</a> <br>
-                                        <a class="lost_pass" href="#">비밀번호 찾기</a>
+                                        <!-- <a class="lost_pass" href="#">아이디 찾기</a> <br>
+                                        <a class="lost_pass" href="#">비밀번호 찾기</a> -->
                                     </div>
                                 </form>
                             </div>
@@ -175,7 +77,7 @@
                             <div class="single-footer-caption mb-30">
                                 <!-- logo -->
                                 <!-- <div class="footer-logo">
-                                    <a href="index.html"><img src="assets/img/logo/logo2_footer.png" alt=""></a>
+                                    <a href="index.php"><img src="assets/img/logo/logo2_footer.png" alt=""></a>
                                 </div> -->
                                 <div class="footer-tittle">
                                     <div class="footer-pera">
