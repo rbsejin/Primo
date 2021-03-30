@@ -82,7 +82,7 @@
                                             <li><a href="#">공지사항</a></li>
                                             <li><a href="#">일정</a></li>
                                             <li><a href="#">자주묻는질문</a></li>
-                                            <li><a href="#">AS문의</a></li>
+                                            <li><a href="as.php">AS문의</a></li>
                                         </ul>
                                     </li>
 
@@ -134,8 +134,11 @@
                                     if (isset($_SESSION['id'])) {
                                         // 세션이 등록되어있습니다.
                                         // 로그아웃
-                                        echo '<li> <a href="logout.php"><span>로그아웃</span></a></li>';
+                                        echo '<li> <a href="#"><span>';
+                                        echo $_SESSION['id'].'님';
+                                        echo '</span></a></li>';
                                         echo '<li> <a href="#"><span class="flaticon-user"></span></a></li>';
+                                        echo '<li> <a href="logout.php"><span>로그아웃</span></a></li>';
                                     } else {
                                         // 세션이 등록되어 있지 않습니다.
                                         // 로그인 화면
