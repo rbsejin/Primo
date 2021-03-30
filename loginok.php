@@ -36,7 +36,7 @@
     } else {
         // 로그인 페이지로 이동
         echo "로그인 실패";
-        echo "<meta http-equiv='refresh' content='0; url=login.html'>";
+        echo "<meta http-equiv='refresh' content='0; url=login.php'>";
     }
 ?>
 </body>

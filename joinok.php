@@ -30,11 +30,11 @@
     $result = mysqli_query($conn, $sql);
 
     if ($result) {
-        echo '저장 성공';
-        echo "<meta http-equiv='refresh' content='0; url=login.html'>";
+        echo '회원가입 성공';
+        echo "<meta http-equiv='refresh' content='0; url=login.php'>";
     } else {
-        echo '저장하지 못했습니다.';
-        error_log(mysql_error($conn));
+        echo '회원가입 실패';
+        error_log(mysqli_error($conn));
         echo "<meta http-equiv='refresh' content='0; url=join.php'>";
     }
 ?>
