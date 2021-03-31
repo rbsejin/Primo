@@ -21,22 +21,26 @@
         </div>
         <!-- Hero Area End-->
         <!--================login_part Area =================-->
-      
-    <form action="as-writeok.php" method="post">
-            <!-- <input type="hidden" name="bdGroup" value=<%=bdGroup%>>
-            <input type="hidden" name="bdOrder" value=<%=bdOrder%>>
-            <input type="hidden" name="bdIndent" value=<%=bdIndent%>> -->
-            <input type="text" name="bdTitle" class="form-control mt-4 mb-2"
-                placeholder="제목을 입력해주세요." required>
-        <div class="form-group">
-            <textarea class="form-control" rows="10" name="bdContent"
-                placeholder="내용을 입력해주세요" required
-            ></textarea>
-        </div>
-        <div class="form-row float-right">
-            <button type="submit" class="btn btn-secondary mb-3">제출하기</button>
-        </div>
-    </form>    
+
+
+
+        <?php
+            $conn = mysqli_connect("127.0.0.1", "root", "vision9292!", "primo");
+
+            // if (!$conn) {
+            //     echo 'db에 연결하지 못했습니다.'. mysqli_connect_error();
+            // } else {
+            //     echo 'db에 접속했습니다.';
+            // }
+
+        
+            $view_num = $_POST['number'];
+            $sql = "DELETE FROM as_board WHERE number = $view_num";
+            $result = mysqli_query($conn, $sql);
+
+            mysqli_close($conn);
+            echo "<meta http-equiv='refresh' content='0; url=as.php'>";
+        ?>
 
         <!--================login_part end =================-->
     </main>

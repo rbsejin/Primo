@@ -21,18 +21,23 @@
     $userid = $_SESSION["id"];
     $title = $_POST["bdTitle"];
     $content = $_POST["bdContent"];
+    $number = $_POST["number"];
 
-    $sql = "INSERT INTO as_board (userid, title, content) VALUES ('$userid', '$title', '$content')";
+    $sql = "UPDATE as_board SET title = '$title' WHERE number = $number";
+    $result = mysqli_query($conn, $sql);
+
+    $sql = "UPDATE as_board SET content = '$content' WHERE number = $number";
     $result = mysqli_query($conn, $sql);
 
     if ($result) {
-        echo '글 등록';
+        echo '글 수정';
     } else {
-        echo '글을 등록하지 못했습니다.';
+        echo '글을 수정하지 못했습니다.';
         error_log(mysqli_error($conn));
     }
 
-    $sql = "SELECT number FROM as_board WHERE userid = '$userid' AND title = '$title' AND content = '$content' LIMIT 1";
+
+    $sql = "SELECT number FROM as_board WHERE number = '$number' LIMIT 1";
     $result = mysqli_query($conn, $sql);
     $array = mysqli_fetch_array($result);	
     $view_num = $array['number']; 	

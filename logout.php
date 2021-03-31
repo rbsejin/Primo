@@ -13,7 +13,6 @@
 
         // 원래 페이지로 이동
         session_start();
-        $_SESSION['id'] = 'rbsejin';
 
         if (!isset($_SESSION['id'])) {
             echo '세션이 등록되어 있지 않습니다.';

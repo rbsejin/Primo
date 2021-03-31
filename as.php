@@ -33,28 +33,31 @@
 	        </thead>
 
             <tbody>
-                <tr>
-                    <td style="width:60%"> 목요일에 바지 수선 가능한가요? </td>
-                    <!-- 작성자, 작성일, 조회수 -->
-                    <td style="width: 10%" class="text-center">홍길동</td>
-                    <td style="width: 20%" class="text-center">2021-03-31</td>
-                    <td style="width: 10%" class="text-center">0</td>
-                </tr>
-                <tr>
-                    <td style="width:60%"> 자켓에 단추가 떨어졌어요. </td>
-                    <!-- 작성자, 작성일, 조회수 -->
-                    <td style="width: 10%" class="text-center">고길동</td>
-                    <td style="width: 20%" class="text-center">2021-03-31</td>
-                    <td style="width: 10%" class="text-center">0</td>
-                </tr>
-                <tr>
-                    <td style="width:60%"> 치마 지퍼가 나갔어요. </td>
-                    <!-- 작성자, 작성일, 조회수 -->
-                    <td style="width: 10%" class="text-center">둘리</td>
-                    <td style="width: 20%" class="text-center">2021-03-31</td>
-                    <td style="width: 10%" class="text-center">0</td>
-                </tr>
-                
+                <?php
+                    $conn = mysqli_connect("127.0.0.1", "root", "vision9292!", "primo");
+
+                    // if (!$conn) {
+                    //     echo 'db에 연결하지 못했습니다.'. mysqli_connect_error();
+                    // } else {
+                    //     echo 'db에 접속했습니다!!!';
+                    // }
+
+                    // table에서 글 조회
+                    $sql = "SELECT * FROM as_board ORDER BY created DESC";
+                    $result = mysqli_query($conn, $sql);
+                    $list = '';
+
+                    while ($row = mysqli_fetch_array($result)) {
+                        // $list = $list."<li>{$row['number']}: <a href=\"view.php?number={$row['number']}\">{$row['title']}</a></li>";
+                        $list = $list."<tr>
+                        <td style='width:60%' class='text-left'> <a href=\"as-view.php?number={$row['number']}\" style='color:black'>{$row['title']}</a> </td>
+                        <td style='width:10%' class='text-center'> {$row['userid']} </td>
+                        <td style='width:20%' class='text-center'> {$row['created']} </td>
+                        <td style='width:10%' class='text-center'> {$row['view']} </td>
+                        </tr>";
+                    }
+                    echo $list;
+                ?>                         
             </tbody>
         </table>
 

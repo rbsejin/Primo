@@ -64,7 +64,7 @@
                                         <ul class="submenu">
                                             <li><a href="#">편한교복스타일</a></li>
                                             <li><a href="#">정장하복스타일</a></li>
-                                            <li><a href="#">정장동복 스타일</a></li>
+                                            <li><a href="#">정장동복스타일</a></li>
                                         </ul>
                                     </li>
 
@@ -77,7 +77,7 @@
                                         </ul>
                                     </li>
 
-                                    <li><a href="#">매장/고객센터</a>
+                                    <li><a href="#">고객센터</a>
                                         <ul class="submenu">
                                             <li><a href="#">공지사항</a></li>
                                             <li><a href="#">일정</a></li>
