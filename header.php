@@ -70,8 +70,8 @@
 
                                     <li><a href="#">마켓</a>
                                         <ul class="submenu">
+                                            <li><a href="market.php">여학생복</a></li>
                                             <li><a href="#">남학생복</a></li>
-                                            <li><a href="#">여학생복</a></li>
                                             <li><a href="#">생활복</a></li>
                                             <li><a href="#">체육복</a></li>
                                         </ul>
