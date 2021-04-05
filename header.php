@@ -5,7 +5,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Watch shop | eCommers</title>
+    <title>교하 프리모 학생복</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="manifest" href="site.webmanifest">
@@ -70,10 +70,8 @@
 
                                     <li><a href="#">마켓</a>
                                         <ul class="submenu">
-                                            <li><a href="market.php">여학생복</a></li>
-                                            <li><a href="#">남학생복</a></li>
-                                            <li><a href="#">생활복</a></li>
-                                            <li><a href="#">체육복</a></li>
+                                            <li><a href="market.php?sex=W&school=한빛고">여학생복</a></li>
+                                            <li><a href="market.php?sex=M&school=한빛고">남학생복</a></li>
                                         </ul>
                                     </li>
 

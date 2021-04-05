@@ -12,7 +12,16 @@ include_once('header.php');
                 <div class="row">
                     <div class="col-xl-12">
                         <div class="hero-cap text-center">
-                            <h2>마켓</h2>
+
+                            <h2>
+                                <?php
+                                if (isset($_GET['school'])) {
+                                    echo $_GET['school'];
+                                } else {
+                                    echo '마켓';
+                                }
+                                ?>
+                            </h2>
                         </div>
                     </div>
                 </div>
@@ -28,10 +37,10 @@ include_once('header.php');
                     <!--Nav Button  -->
                     <nav>
                         <div class="nav nav-tabs" id="nav-tab" role="tablist">
-                            <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#nav-contact" role="tab" aria-controls="nav-contact" aria-selected="false"> 운정중 </a>
-                            <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true"> 한빛중 </a>
-                            <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false"> 한빛고 </a>
-                            <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#nav-contact" role="tab" aria-controls="nav-contact" aria-selected="false"> 동패고 </a>
+                            <a class="nav-item nav-link" href="market.php?sex=<?= $_GET['sex'] ?>&school=운정중"> 운정중 </a>
+                            <a class="nav-item nav-link" href="market.php?sex=<?= $_GET['sex'] ?>&school=한빛중"> 한빛중 </a>
+                            <a class="nav-item nav-link" href="market.php?sex=<?= $_GET['sex'] ?>&school=한빛고"> 한빛고 </a>
+                            <a class="nav-item nav-link" href="market.php?sex=<?= $_GET['sex'] ?>&school=동패고"> 동패고 </a>
                         </div>
                     </nav>
                     <!--End Nav Button  -->
@@ -58,57 +67,61 @@ include_once('header.php');
                 <!-- card one -->
                 <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
                     <div class="row">
-                        <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6">
-                            <div class="single-popular-items mb-50 text-center">
-                                <div class="popular-img">
-                                    <img src="assets/img/gallery/market/ujm_w_jacket.jpg" alt="">
-                                    <div class="img-cap">
-                                        <span>장바구니에 추가</span>
+
+                        <?php
+                        $conn = mysqli_connect("127.0.0.1", "root", "vision9292!", "primo");
+
+                        if (!$conn) {
+                            echo 'db에 연결하지 못했습니다.' . mysqli_connect_error();
+                            die();
+                        }
+
+                        $sex = $_GET['sex'];
+                        $school = $_GET['school'];
+
+                        $sql = "SELECT * FROM item WHERE (item.sex = '$sex' OR item.sex = 'C') AND item.school = '$school'";
+                        $result = mysqli_query($conn, $sql);
+
+                        $list = '';
+
+                        while ($row = mysqli_fetch_array($result)) {
+                            $itemId = $row['id'];
+                            $sql = "SELECT * FROM product LEFT JOIN item ON product.item_id = item.id WHERE item.id = '$itemId'";
+
+                            $itemName = $row['name'];
+                            $itemPrice = $row['price'];
+                            $itemImage = $row['image'];
+
+                            if ($itemImage == null) {
+                                $itemImage = 'assets/img/gallery/market/' . $school . '/hbh_hood.jpg';
+                            } else {
+                                $itemImage = 'assets/img/gallery/market/' . $school . '/' . $itemImage;
+                            }
+
+                            $list = $list .
+                                "
+                            <div class='col-xl-4 col-lg-4 col-md-6 col-sm-6'>
+                                <div class='single-popular-items mb-50 text-center'>
+                                    <div class='popular-img'>
+                                        <img src=$itemImage height='400' alt=''>
+                                        <div class='img-cap'>
+                                            <span>장바구니에 추가</span>
+                                        </div>
+                                        <div class='favorit-items'>
+                                            <span class='flaticon-heart'></span>
+                                        </div>
                                     </div>
-                                    <div class="favorit-items">
-                                        <span class="flaticon-heart"></span>
+                                    <div class='popular-caption'>
+                                        <h3><a href='#'> $itemName </a></h3>
+                                        <span> $itemPrice 원</span>
                                     </div>
-                                </div>
-                                <div class="popular-caption">
-                                    <h3><a href="product_details.html">Thermo Ball Etip Gloves</a></h3>
-                                    <span>$ 45,743</span>
                                 </div>
                             </div>
-                        </div>
-                        <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6">
-                            <div class="single-popular-items mb-50 text-center">
-                                <div class="popular-img">
-                                <img src="assets/img/gallery/market/ujm_w_blouse.jpg" alt="">
-                                    <div class="img-cap">
-                                        <span>장바구니에 추가</span>
-                                    </div>
-                                    <div class="favorit-items">
-                                        <span class="flaticon-heart"></span>
-                                    </div>
-                                </div>
-                                <div class="popular-caption">
-                                    <h3><a href="product_details.html">Thermo Ball Etip Gloves</a></h3>
-                                    <span>$ 45,743</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6">
-                            <div class="single-popular-items mb-50 text-center">
-                                <div class="popular-img">
-                                <img src="assets/img/gallery/market/ujm_c_hood.jpg" alt="">
-                                    <div class="img-cap">
-                                        <span>장바구니에 추가</span>
-                                    </div>
-                                    <div class="favorit-items">
-                                        <span class="flaticon-heart"></span>
-                                    </div>
-                                </div>
-                                <div class="popular-caption">
-                                    <h3><a href="product_details.html">Thermo Ball Etip Gloves</a></h3>
-                                    <span>$ 45,743</span>
-                                </div>
-                            </div>
-                        </div>
+                            ";
+                        }
+
+                        echo $list;
+                        ?>
                     </div>
                 </div>
             </div>
