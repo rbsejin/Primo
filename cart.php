@@ -2,9 +2,9 @@
 <html lang="zxx">
 
 <script>
-  function changeOnSubmit() {
-    document.getElementById("quantity").value = document.getElementById("quantity_edit").value
-    document.getElementById("size").value = document.getElementById("size_select").value
+  function changeOnSubmit(cartId) {
+    document.getElementById("quantity" + String(cartId)).value = document.getElementById("quantity_edit" + String(cartId)).value;
+    document.getElementById("size" + String(cartId)).value = document.getElementById("size_select" + String(cartId)).value;
   }
 </script>
 
@@ -101,7 +101,7 @@ $result = mysqli_query($conn, $sql);
                   <h5>' . $productPrice . '원</h5>
                 </td>
                 <td>
-                  <select id="size_select" class="form-select" name="size" aria-label="Default select example">';
+                  <select id="size_select' . $cartId . '" class="form-select" name="size" aria-label="Default select example">';
 
                 $sql = "SELECT * FROM product WHERE item_id = '$itemId' ORDER BY size ";
                 $sizeResult = mysqli_query($conn, $sql);
@@ -120,7 +120,7 @@ $result = mysqli_query($conn, $sql);
                 <td>
                   <div class="product_count">
                     <!-- <span class="input-number-decrement"> <i class="ti-minus"></i></span> -->
-                    <input id="quantity_edit" class="input-number" type="text" value="' . $quantity . '" min="1" max="20">
+                    <input id="quantity_edit' . $cartId . '" class="input-number" type="text" value="' . $quantity . '" min="1" max="20">
                     <!-- <span class="input-number-increment"> <i class="ti-plus"></i></span> -->
                   </div>
                 </td>
@@ -134,12 +134,12 @@ $result = mysqli_query($conn, $sql);
                       <input class="genric-btn default" type="submit" value="삭제">
                     </div>
                   </form>
-                  <form action="update_cart.php" method="post" onsubmit="changeOnSubmit()">
+                  <form action="update_cart.php" method="post" onsubmit="changeOnSubmit(' . $cartId . ')">
                     <div>
                       <input name="cart_id" type="hidden" value="' . $cartId . '">
-                      <input id="product_id" name="product_id" type="hidden" value="' . $productId . '">
-                      <input id="quantity" name="quantity" type="hidden" value="' . $quantity . '">
-                      <input id="size" name="size" name="size" type="hidden" value="' . $size . '">
+                      <input name="product_id" type="hidden" value="' . $productId . '">
+                      <input id="quantity' . $cartId . '" name="quantity" type="hidden" value="' . $quantity . '">
+                      <input id="size' . $cartId . '" name="size" name="size" type="hidden" value="' . $size . '">
                       <input class="genric-btn default" type="submit" value="변경">
                     </div>
                   </form>
