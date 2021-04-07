@@ -2,11 +2,8 @@
 <html lang="zxx">
 
 <script>
-  function quantityOnChange() {
+  function changeOnSubmit() {
     document.getElementById("quantity").value = document.getElementById("quantity_edit").value
-  }
-
-  function sizeOnChange() {
     document.getElementById("size").value = document.getElementById("size_select").value
   }
 </script>
@@ -104,7 +101,7 @@ $result = mysqli_query($conn, $sql);
                   <h5>' . $productPrice . '원</h5>
                 </td>
                 <td>
-                  <select id="size_select" class="form-select" name="size" aria-label="Default select example" onchange="sizeOnChange()">';
+                  <select id="size_select" class="form-select" name="size" aria-label="Default select example">';
 
                 $sql = "SELECT * FROM product WHERE item_id = '$itemId' ORDER BY size ";
                 $sizeResult = mysqli_query($conn, $sql);
@@ -123,7 +120,7 @@ $result = mysqli_query($conn, $sql);
                 <td>
                   <div class="product_count">
                     <!-- <span class="input-number-decrement"> <i class="ti-minus"></i></span> -->
-                    <input id="quantity_edit" class="input-number" type="text" value="' . $quantity . '" min="1" max="20" onchange="quantityOnChange()">
+                    <input id="quantity_edit" class="input-number" type="text" value="' . $quantity . '" min="1" max="20">
                     <!-- <span class="input-number-increment"> <i class="ti-plus"></i></span> -->
                   </div>
                 </td>
