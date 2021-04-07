@@ -135,15 +135,15 @@
                                         echo '<li> <a href="#"><span>';
                                         echo $_SESSION['id'].'님';
                                         echo '</span></a></li>';
-                                        echo '<li> <a href="#"><span class="flaticon-user"></span></a></li>';
                                         echo '<li> <a href="logout.php"><span>로그아웃</span></a></li>';
+                                        echo '<li> <a href="#"><span class="flaticon-user"></span></a></li>';
+                                        echo '<li><a href="cart.php"><span class="flaticon-shopping-cart"></span></a> </li>';
                                     } else {
                                         // 세션이 등록되어 있지 않습니다.
                                         // 로그인 화면
                                         echo '<li> <a href="login.php"><span>로그인</span></a></li>';
                                     }
                                 ?>
-                                <!-- <li><a href="#"><span class="flaticon-shopping-cart"></span></a> </li> -->
                             </ul>
                         </div>
                     </div>

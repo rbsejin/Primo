@@ -15,8 +15,12 @@ include_once('header.php');
 
                             <h2>
                                 <?php
-                                if (isset($_GET['school'])) {
-                                    echo $_GET['school'];
+                                if (isset($_GET['school']) && isset($_GET['sex'])) {
+                                    if ($_GET['sex'] == 'W') {
+                                        echo $_GET['school'] . '-여자';
+                                    } else {
+                                        echo $_GET['school'] . '-남자';
+                                    }
                                 } else {
                                     echo '마켓';
                                 }
@@ -104,15 +108,9 @@ include_once('header.php');
                                 <div class='single-popular-items mb-50 text-center'>
                                     <div class='popular-img'>
                                         <img src=$itemImage height='400' alt=''>
-                                        <div class='img-cap'>
-                                            <span>장바구니에 추가</span>
-                                        </div>
-                                        <div class='favorit-items'>
-                                            <span class='flaticon-heart'></span>
-                                        </div>
                                     </div>
                                     <div class='popular-caption'>
-                                        <h3><a href='#'> $itemName </a></h3>
+                                        <h3><a href='product_details.php?item_id={$itemId}&sex={$sex}'> $itemName </a></h3>
                                         <span> $itemPrice 원</span>
                                     </div>
                                 </div>
