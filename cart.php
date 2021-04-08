@@ -53,11 +53,11 @@ $result = mysqli_query($conn, $sql);
           <table class="table">
             <thead>
               <tr>
-                <th scope="col">제품</th>
-                <th scope="col">가격</th>
+                <th scope="col">상품정보</th>
+                <th scope="col">상품금액</th>
                 <th scope="col">사이즈</th>
                 <th scope="col">수량</th>
-                <th scope="col">총 가격</th>
+                <th scope="col">결제 금액</th>
                 <th scope="col">선택</th>
               </tr>
             </thead>
@@ -149,7 +149,7 @@ $result = mysqli_query($conn, $sql);
                 <td></td>
                 <td></td>
                 <td>
-                  <h5>총 제품금액</h5>
+                  <h5>총 결제금액</h5>
                 </td>
                 <td>
                   <h5><?= $totalPrice ?>원</h5>
