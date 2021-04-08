@@ -12,8 +12,8 @@ if (!isset($_SESSION['id'])) {
 
 $userId = $_SESSION['id'];
 $cartId = $_POST['cart_id'];
-$size = $_POST['size'];
-$quantity = $_POST['quantity'];
+$size = $_POST["size$cartId"];
+$quantity = $_POST["quantity$cartId"];
 
 // DB 연결
 $conn = mysqli_connect("127.0.0.1", "root", "vision9292!", "primo");
