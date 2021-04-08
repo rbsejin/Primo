@@ -23,45 +23,36 @@ $itemId = $_POST['item_id'];
 $size = $_POST['size'];
 $quantity = $_POST['quantity'];
 
-// 카트에 추가할 제품을 조회한다.
-$sql = "SELECT *, product.id AS product_id FROM product LEFT JOIN item ON product.item_id = item.id WHERE item.id = $itemId AND size = $size";
+// 카트에 같은 제품이 있는지 확인한다.
+$sql = "SELECT cart.id, cart.size, cart.quantity, cart.user_id, cart.item_id, item.image, item.school, item.name, item.sex, item.price FROM cart LEFT JOIN item ON item_id = item.id WHERE user_id = '$userId' AND cart.item_id = $itemId AND cart.size = $size";
 $result = mysqli_query($conn, $sql);
-$row = mysqli_fetch_array($result);
-if (!$row) {
+if (!$result) {
+    echo "쿼리 오류";
     mysqli_close($conn);
     die();
 }
 
-// 제품의 정보를 변수에 대입한다.
-$productId = $row['product_id'];
-$productPrice = $row['price'];
-$school = $row['school'];
-$name = $row['name'];
-$productName = $productName = $school . ' ' . $name;
-$itemImage = $row['image'];
+$row = mysqli_fetch_array($result);
 
-// 제품이 카트의 목록에 있는지 확인한다.
-$sql = "SELECT * FROM cart WHERE user_id = '$userId' AND product_id = $productId";
-$result = mysqli_query($conn, $sql);
-
-if ($row = mysqli_fetch_array($result)) {
-    // 제품이 카트에 있으면 수량만 증가
-    $sql = "UPDATE cart SET quantity = quantity + " . $quantity . " WHERE user_id = '$userId' AND product_id = $productId";
+if ($row) {
+    // 기존 제품에 수량을 추가한다.
+    $cartId = $row['id'];
+    $sql = "UPDATE cart SET quantity = quantity + " . $quantity . " WHERE id = $cartId";
     $result = mysqli_query($conn, $sql);
 
     if (!$result) {
         echo "DB 수정 실패";
-        mysqli_close($conn);
+        mysqli_close($con);
         die();
     }
 } else {
-    // 제품이 카트에 없으면 새로 추가
-    $sql = "INSERT INTO cart (product_id, quantity, user_id) VALUES ($productId, $quantity, '$userId')";
+    // 카트에 새로운 제품을 추가한다.
+    $sql = "INSERT INTO cart (size, quantity, user_id, item_id) VALUES ($size, $quantity, '$userId', $itemId)";
     $result = mysqli_query($conn, $sql);
 
     if (!$result) {
         echo "DB 삽입 실패";
-        mysqli_close($con);
+        mysqli_close($conn);
         die();
     }
 }

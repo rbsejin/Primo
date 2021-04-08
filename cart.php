@@ -26,12 +26,8 @@ if (!$conn) {
   die();
 }
 
-$sql = "SELECT cart.id, cart.quantity, product.id as product_id, product.size, item.id as item_id, item.school, item.name, item.price, item.image
-FROM cart LEFT JOIN product ON product_id = product.id LEFT JOIN item ON item_id = item.id WHERE user_id = '$userId'";
+$sql = "SELECT cart.id, cart.size, cart.quantity, cart.user_id, cart.item_id, item.image, item.school, item.name, item.sex, item.price FROM cart LEFT JOIN item ON item_id = item.id WHERE user_id = '$userId'";
 $result = mysqli_query($conn, $sql);
-
-// $sql = "SELECT * FROM cart  ORDER BY size ";
-// $sizesResult = mysqli_query($conn, $sql);
 ?>
 
 <main>
@@ -72,15 +68,15 @@ $result = mysqli_query($conn, $sql);
 
               while ($row = mysqli_fetch_array($result)) {
                 $cartId = $row['id'];
-                $itemId = $row["item_id"];
-                $school = $row['school'];
-                $itemImage = $row['image'];
-                $productId = $row['product_id'];
-                $productName = $school . ' ' . $row['name'];
-                $productPrice = $row['price'];
-                $quantity = $row['quantity'];
                 $size = $row['size'];
-                $subTotal = $productPrice * $quantity;
+                $quantity = $row['quantity'];
+                $itemId = $row["item_id"];
+                $itemImage = $row['image'];
+                $itemSchool = $row['school'];
+                $itemName = $row['name'];
+                $productName = $itemSchool . ' ' . $itemName;
+                $itemPrice = $row['price'];
+                $subTotal = $itemPrice * $quantity;
                 $totalPrice += $subTotal;
 
                 $list = $list . '<tr>
@@ -90,7 +86,7 @@ $result = mysqli_query($conn, $sql);
                       <input class="form-check-input" type="checkbox" value="" checked>
                     </div>
                     <div class="d-flex">
-                      <img src="assets/img/gallery/market/' . $school . '/' . $itemImage . '" alt="" />
+                      <img src="assets/img/gallery/market/' . $itemSchool . '/' . $itemImage . '" alt="" />
                     </div>
                     <div class="media-body">
                       <p>' . "$productName" . '</p>
@@ -98,7 +94,7 @@ $result = mysqli_query($conn, $sql);
                   </div>
                 </td>
                 <td>
-                  <h5>' . $productPrice . '원</h5>
+                  <h5>' . $itemPrice . '원</h5>
                 </td>
                 <td>
                   <select id="size_select' . $cartId . '" class="form-select" name="size" aria-label="Default select example">';
@@ -137,9 +133,8 @@ $result = mysqli_query($conn, $sql);
                   <form action="update_cart.php" method="post" onsubmit="changeOnSubmit(' . $cartId . ')">
                     <div>
                       <input name="cart_id" type="hidden" value="' . $cartId . '">
-                      <input name="product_id" type="hidden" value="' . $productId . '">
+                      <input id="size' . $cartId . '" name="size" type="hidden" value="' . $size . '">
                       <input id="quantity' . $cartId . '" name="quantity" type="hidden" value="' . $quantity . '">
-                      <input id="size' . $cartId . '" name="size" name="size" type="hidden" value="' . $size . '">
                       <input class="genric-btn default" type="submit" value="변경">
                     </div>
                   </form>
@@ -148,15 +143,6 @@ $result = mysqli_query($conn, $sql);
               }
               echo $list;
               ?>
-
-              <!-- <tr class="bottom_button">
-                <td>
-                  <a class="btn_1" href="update_cart.php">장바구니 업데이트</a>
-                </td>
-                <td></td>
-                <td></td>
-                <td></td>
-              </tr> -->
               <tr>
                 <td></td>
                 <td></td>
@@ -168,40 +154,6 @@ $result = mysqli_query($conn, $sql);
                 <td>
                   <h5><?= $totalPrice ?>원</h5>
                 </td </tr>
-                <!-- <tr class="shipping_area">
-                <td></td>
-                <td></td>
-                <td></td>
-                <td>
-                  <h5>Shipping</h5>
-                </td>
-                <td>
-                  <div class="shipping_box">
-                    <ul class="list">
-                      <li>
-                        Flat Rate: $5.00
-                        <input type="radio" aria-label="Radio button for following text input">
-                      </li>
-                    </ul>
-                    <h6>
-                      Calculate Shipping
-                      <i class="fa fa-caret-down" aria-hidden="true"></i>
-                    </h6>
-                    <select class="shipping_select">
-                      <option value="1">Bangladesh</option>
-                      <option value="2">India</option>
-                      <option value="4">Pakistan</option>
-                    </select>
-                    <select class="shipping_select section_bg">
-                      <option value="1">Select a State</option>
-                      <option value="2">Select a State</option>
-                      <option value="4">Select a State</option>
-                    </select>
-                    <input class="post_code" type="text" placeholder="Postcode/Zipcode" />
-                    <a class="btn_1" href="#">Update Details</a>
-                  </div>
-                </td>
-              </tr> -->
             </tbody>
           </table>
           <div class="checkout_btn_inner float-right">

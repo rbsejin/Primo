@@ -12,9 +12,8 @@ if (!isset($_SESSION['id'])) {
 
 $userId = $_SESSION['id'];
 $cartId = $_POST['cart_id'];
-$productId = $_POST['product_id'];
-$quantity = $_POST['quantity'];
 $size = $_POST['size'];
+$quantity = $_POST['quantity'];
 
 // DB 연결
 $conn = mysqli_connect("127.0.0.1", "root", "vision9292!", "primo");
@@ -23,7 +22,7 @@ if (!$conn) {
     die();
 }
 
-$sql = "SELECT cart.quantity, product_id, product.size, product.item_id FROM cart LEFT JOIN product ON product_id = product.id WHERE cart.id = $cartId";
+$sql = "SELECT * FROM cart WHERE cart.id = $cartId";
 $result = mysqli_query($conn, $sql);
 $row = mysqli_fetch_array($result);
 
@@ -32,14 +31,9 @@ if (!$row) {
     die();
 }
 
-// 1.사이즈가 다르면 사이즈에 맞는 제품id 찾아서 변경
+// 1.사이즈 변경
 if ($row['size'] != $size) {
-    $sql = "SELECT id FROM product WHERE item_id = ${row['item_id']} AND size = $size";
-    $result = mysqli_query($conn, $sql);
-    $sizeRow = mysqli_fetch_array($result);
-    $newProductId = $sizeRow['id'];
-
-    $sql = "UPDATE cart SET product_id = $newProductId WHERE id = $cartId";
+    $sql = "UPDATE cart SET size = $size WHERE id = $cartId";
     $result = mysqli_query($conn, $sql);
 
     if (!$result) {
@@ -49,7 +43,7 @@ if ($row['size'] != $size) {
 }
 
 
-// 2. 수량이 다르면 수량 컬럼 변경
+// 2. 수량이 변경
 if ($row['quantity'] != $quantity) {
     $sql = "UPDATE cart SET quantity = $quantity WHERE id = $cartId";
     $result = mysqli_query($conn, $sql);
