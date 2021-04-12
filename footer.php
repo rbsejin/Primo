@@ -14,8 +14,8 @@
                                 <div class="footer-pera">
                                     <ul>
                                         <li>회사명: 교하 프리모 학생복</a></li>
-                                        <li>대표: 이동화</a></li>
-                                        <li>이메일: xxxxx@naver.com</a></li>
+                                        <li>대표: 이교복</a></li>
+                                        <li>이메일: primo@naver.com</a></li>
                                         <li>대표번호: 031) 000-0000</a></li>
                                     </ul>
                                 </div>

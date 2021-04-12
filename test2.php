@@ -1,5 +1,5 @@
 
-<form method="post" action="kakaoPay.php">
+<form method="post" action="CallPaymentKakaoPay">
     <!--
         결제정보셋팅
       -->

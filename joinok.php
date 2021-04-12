@@ -21,11 +21,16 @@
     $password = $_POST["password"];
     $name = $_POST["name"];
     $email = $_POST["email"];
+    $phoneNumber = $_POST["phone_number"];
+    $postcode = $_POST["postcode"];
+    $address = $_POST["address"];
+    $detailAddress = $_POST["detailAddress"];
+    $extraAddress = $_POST["extraAddress"];
 
     include"./password.php";
     $hash = password_hash($password, PASSWORD_DEFAULT);
 
-    $sql = "INSERT INTO user (id, pass, name, email) VALUES ('$id', '$hash', '$name', '$email')";
+    $sql = "INSERT INTO user (id, pass, name, email, phone_number, postcode, address, detail_address, extra_address) VALUES ('$id', '$hash', '$name', '$email', '$phoneNumber', '$postcode', '$address', '$detailAddress', '$extraAddress')";
     
     $result = mysqli_query($conn, $sql);
 

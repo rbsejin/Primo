@@ -201,7 +201,7 @@ $result = mysqli_query($conn, $sql);
               <button type="submit" class="btn_1" formaction="delete_from_cart_selected.php">선택 삭제</button>
               <button type="submit" class="btn_1">선택상품 주문</button>
               <button type="submit" class="btn_1" onclick="selectCheck()">전체상품 주문</button>
-              <a class="btn_1" href="#">쇼핑 계속하기</a>
+              <a class="btn_1" href="market.php?sex=M&school=한빛고">쇼핑 계속하기</a>
             </div>
           </form>
         </div>
