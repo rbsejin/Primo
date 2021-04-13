@@ -19,15 +19,80 @@ if (!$conn) {
     die();
 }
 
-$cartIds = $_POST['cart_ids'];
-$cartIdSql = "1 != 1";
+$payId = $_POST['pay_id'];
 
-foreach ($cartIds as $cartId) {
-    $cartIdSql = "$cartIdSql OR cart.id = $cartId";
+$sql = "SELECT * FROM pay_info WHERE id = '$payId'";
+$result = mysqli_query($conn, $sql);
+
+if (!$result) {
+    mysqli_close($conn);
+    die();
 }
 
-$sql = "SELECT cart.id, cart.size, cart.quantity, cart.user_id, cart.item_id, item.image, item.school, item.name, item.sex, item.price FROM cart LEFT JOIN item ON item_id = item.id WHERE user_id = '$userId' AND ($cartIdSql)";
+$row = mysqli_fetch_array($result);
+if (!$row) {
+    mysqli_close($conn);
+    die();
+}
+
+$recipient = $row['recipient'];
+$postcode = $row['postcode'];
+$address = $row['address'];
+$detail_address = $row['detail_address'];
+$extra_address = $row['extra_address'];
+$item_price = $row['item_price'];
+$delivery_charge = $row['delivery_charge'];
+$total_price = $row['total_price'];
+$paytype = $row['paytype'];
+$user_id = $row['user_id'];
+
+$sql = "SELECT purchase_list.id, purchase_list.size, purchase_list.quantity, purchase_list.created,
+purchase_list.state, purchase_list.subtotal, purchase_list.user_id, purchase_list.item_id,
+item.school, item.name, item.price, item.image FROM purchase_list LEFT JOIN item ON item_id = item.id WHERE pay_id = $payId";
 $result = mysqli_query($conn, $sql);
+if (!$result) {
+    mysqli_close($conn);
+    die();
+}
+
+// $cartIds = $_POST['cart_ids'];
+// $cartIdSql = "1 != 1";
+
+// foreach ($cartIds as $cartId) {
+//     $cartIdSql = "$cartIdSql OR cart.id = $cartId";
+// }
+
+// $sql = "SELECT cart.id, cart.size, cart.quantity, cart.user_id, cart.item_id, item.image, item.school, item.name, item.sex, item.price FROM cart LEFT JOIN item ON item_id = item.id WHERE user_id = '$userId' AND ($cartIdSql)";
+// $result = mysqli_query($conn, $sql);
+
+// $totalPrice = 0;
+// $total_quantity = 0;
+// $deliveryCharge = 2500;
+// $paytype = "카카오페이";
+
+// while ($row = mysqli_fetch_array($result)) {
+//     $size = $row['size'];
+//     $quantity = $row['quantity'];
+//     $itemId = $row["item_id"];
+//     $itemImage = $row['image'];
+//     $itemSchool = $row['school'];
+//     $itemName = $row['name'];
+//     $itemPrice = $row['price'];
+//     $subtotal = $itemPrice * $quantity;
+//     $totalPrice += $subtotal;
+//     $total_quantity += $quantity;
+
+//     $sql2 = "INSERT INTO purchase_list (size, quantity, state, subtotal, delivery_charge, total_payment_amount, paytype, user_id, item_id) VALUES ($size, $quantity, '결제완료', $subtotal, $deliveryCharge, $totalPrice, '$paytype', '$userId', $itemId)";
+//     $result2 = mysqli_query($conn, $sql2);
+
+//     if (!$result2) {
+//         echo "<script>alert('실패');</script>";
+//         die();
+//     }
+// }
+
+// $result = mysqli_query($conn, $sql);
+
 ?>
 
 <main>
@@ -60,11 +125,11 @@ $result = mysqli_query($conn, $sql);
                         </h3>
                         <div>
                             <ul>
-                                <li>받는 분 : 이세진</li>
+                                <li>받는 분 : <?= $recipient ?></li>
                                 <li>
                                     <div>
                                         <span>주소 : </span>
-                                        <span>(07725) 서울특별시 강서구 초록마을로28길 33, 파랑새빌라트 a동 101호(화곡동,파랑새빌라트)</span>
+                                        <span><?= "($postcode) $address, $detail_address $extra_address" ?></span>
                                         <span></span>
                                     </div>
                                 </li>
@@ -106,14 +171,9 @@ $result = mysqli_query($conn, $sql);
                                 $itemName = $row['name'];
                                 $productName = "$itemSchool $itemName $size";
                                 $itemPrice = $row['price'];
-                                $subTotal = $itemPrice * $quantity;
-                                $totalPrice += $subTotal;
+                                $subtotal = $itemPrice * $quantity;
+                                $totalPrice += $subtotal;
                                 $total_quantity += $quantity;
-                                if ($item_name == "") {
-                                    $item_name = $productName;
-                                } else {
-                                    $item_name = "$item_name, $productName";
-                                }
                             ?>
 
                                 <tr>
@@ -129,7 +189,7 @@ $result = mysqli_query($conn, $sql);
                                     </td>
                                     <td><?= $itemPrice ?>원</td>
                                     <td><?= $quantity ?></td>
-                                    <td><?= $subTotal ?>원</td>
+                                    <td><?= $subtotal ?>원</td>
                                 </tr>
                             <?php } ?>
                         </tbody>

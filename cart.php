@@ -48,7 +48,7 @@ include_once('header.php');
 
 <?php
 if (!isset($_SESSION['id'])) {
-  echo '다시 로그인해주세요.';
+  '다시 로그인해주세요.';
   die();
 }
 
@@ -170,7 +170,7 @@ $result = mysqli_query($conn, $sql);
                       <div>
                         <input class="genric-btn default" type="submit" value="삭제" onclick="changeCartId(<?= $cartId ?>)" formaction="delete_from_cart.php">
                       </div>
-                      <div style="margin-top: 10px;">   
+                      <div style="margin-top: 10px;">
                         <!-- <input name="size<?= $cartId ?>" type="hidden" value="<?= $size ?>">
                         <input name="quantity<?= $cartId ?>" type="hidden" value="<?= $quantity ?>"> -->
                         <input class="genric-btn default" type="submit" value="변경" onclick="changeCartId(<?= $cartId ?>)" formaction="update_cart.php">
@@ -181,7 +181,7 @@ $result = mysqli_query($conn, $sql);
                 <?php } ?>
 
                 <input id="cart_id" name="cart_id" type="hidden" value="">
-                
+
                 <tr>
                   <td></td>
                   <td></td>

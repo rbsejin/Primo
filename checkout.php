@@ -121,7 +121,7 @@ $user = User::fromBasicDb($conn, $userId);
                 msg += '카드 승인번호 : ' + rsp.apply_num;
 
                 var frmData = document.frmData;
-                frmData.action = "checkout_complete.php";
+                frmData.action = "checkout_insert.php";
                 frmData.submit();
             } else {
                 var msg = '결제에 실패하였습니다.';
@@ -212,8 +212,8 @@ $user = User::fromBasicDb($conn, $userId);
                                     $itemName = $row['name'];
                                     $productName = "$itemSchool $itemName $size";
                                     $itemPrice = $row['price'];
-                                    $subTotal = $itemPrice * $quantity;
-                                    $totalPrice += $subTotal;
+                                    $subtotal = $itemPrice * $quantity;
+                                    $totalPrice += $subtotal;
                                     $total_quantity += $quantity;
                                     if ($item_name == "") {
                                         $item_name = $productName;
@@ -235,7 +235,7 @@ $user = User::fromBasicDb($conn, $userId);
                                         </td>
                                         <td><?= $itemPrice ?>원</td>
                                         <td><?= $quantity ?></td>
-                                        <td><?= $subTotal ?>원</td>
+                                        <td><?= $subtotal ?>원</td>
                                         <input class="form-check-input" type="checkbox" name="cart_ids[]" value="<?= $cartId ?>" onClick="selectItem(this)" checked>
                                     </tr>
                                 <?php } ?>
@@ -249,16 +249,19 @@ $user = User::fromBasicDb($conn, $userId);
                         <li>
                             <a href="#">상품금액
                                 <span> <?= $totalPrice ?>원 </span>
+                                <input type="hidden" name="totalPrice" value="<?= $totalPrice ?>"></input>
                             </a>
                         </li>
                         <li>
                             <a href="#">배송비
                                 <span> <?= $deliveryCharge ?>원 </span>
+                                <input type="hidden" name="deliveryCharge" value="<?= $deliveryCharge ?>"></input>
                             </a>
                         </li>
                         <li>
                             <a href="#">총 결제금액
                                 <span> <?= $total_amount = $totalPrice + $deliveryCharge ?>원</span>
+                                <input type="hidden" name="total_amount" value="<?= $total_amount ?>"></input>
                             </a>
                         </li>
                     </ul>
