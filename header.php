@@ -100,7 +100,7 @@ session_start();
                                 if (isset($_SESSION['id'])) {
                                     // 세션이 등록되어있습니다.
                                     // 로그아웃
-                                    echo '<li> <a href="#"><span>';
+                                    echo '<li> <a href="modify_pass.php"><span>';
                                     echo $_SESSION['id'] . '님';
                                     echo '</span></a></li>';
                                     echo '<li> <a href="logout.php"><span>로그아웃</span></a></li>';
