@@ -169,11 +169,13 @@ $result = mysqli_query($conn, $sql);
                             <!-- </a> -->
                             <!-- </li> -->
                             <!-- <?php } ?> -->
-                            <li class="page-item">
-                                <a href="<?= "$PHP_SELP?page=" . max($page - 1, 1) ?>" class="page-link" aria-label="Previous">
-                                    <i class="ti-angle-left"></i>
-                                </a>
-                            </li>
+                            <?php if ($page != 1) { ?>
+                                <li class="page-item">
+                                    <a href="<?= "$PHP_SELP?page=" . max($page - 1, 1) ?>" class="page-link" aria-label="Previous">
+                                        <i class="ti-angle-left"></i>
+                                    </a>
+                                </li>
+                            <?php } ?>
                             <?php
                             for ($i = $start_page; $i <= $end_page; $i++) {
                             ?>
@@ -181,12 +183,13 @@ $result = mysqli_query($conn, $sql);
                                     <a href="<?= "$PHP_SELP?page=$i" ?>" class="page-link"><?= $i ?></a>
                                 </li>
                             <?php } ?>
-
-                            <li class="page-item">
-                                <a href="<?= "$PHP_SELP?page=" . min($page + 1, $page_count) ?>" class="page-link" aria-label="Next">
-                                    <i class="ti-angle-right"></i>
-                                </a>
-                            </li>
+                            <?php if ($page != $page_count) { ?>
+                                <li class="page-item">
+                                    <a href="<?= "$PHP_SELP?page=" . min($page + 1, $page_count) ?>" class="page-link" aria-label="Next">
+                                        <i class="ti-angle-right"></i>
+                                    </a>
+                                </li>
+                            <?php } ?>
                             <!-- <?php if ($page != $page_count) { ?> -->
                             <!-- <li class="page-item"> -->
                             <!-- <a href="<?= "$PHP_SELP?page=$next_page" ?>" class="page-link" aria-label="Next"> -->
