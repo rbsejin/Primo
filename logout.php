@@ -15,16 +15,15 @@
         session_start();
 
         if (!isset($_SESSION['id'])) {
-            echo '세션이 등록되어 있지 않습니다.';
+            echo "<script>alert('세션이 등록되어 있지 않습니다.');</script>";
             die();
         } else {
-            echo $_SESSION['city'].'세션이 등록되어 있습니다.';
+            // echo $_SESSION['city'].'세션이 등록되어 있습니다.';
             session_unset();
-            print_r($_SESSION);
-
+            // print_r($_SESSION);
         }
 
-        echo "로그인 아웃성공";
+        //echo "로그인 아웃성공";
         echo "<meta http-equiv='refresh' content='0; url=index.php'>";
 ?>
 </body>

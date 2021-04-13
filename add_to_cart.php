@@ -42,7 +42,7 @@ if ($row) {
 
     if (!$result) {
         echo "DB 수정 실패";
-        mysqli_close($con);
+        mysqli_close($conn);
         die();
     }
 } else {

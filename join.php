@@ -50,6 +50,7 @@ include_once('header.php');
                 document.getElementById('postcode').value = data.zonecode;
                 document.getElementById("address").value = addr;
                 // 커서를 상세주소 필드로 이동한다.
+                document.getElementById("detailAddress").value = "";
                 document.getElementById("detailAddress").focus();
             }
         }).open();
@@ -123,7 +124,7 @@ include_once('header.php');
                     </div>
                     <div class="col-md-12 form-group p_star">
                         <label>전화번호</label>
-                        <input type="text" class="form-control" id="phoneNumber" name="phone_number" value="">
+                        <input type="text" class="form-control" id="phoneNumber" name="phone_number" maxlength="10" value="">
                     </div>
                     <div class="col-md-12 form-group p_star">
                         <label>주소</label>

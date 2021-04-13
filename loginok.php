@@ -31,11 +31,9 @@
             print_r($_SESSION);
         }
 
-        echo "로그인 성공";
         echo "<meta http-equiv='refresh' content='0; url=index.php'>";
     } else {
         // 로그인 페이지로 이동
-        echo "로그인 실패";
         echo "<meta http-equiv='refresh' content='0; url=login.php'>";
     }
 ?>
