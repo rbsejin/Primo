@@ -47,7 +47,14 @@ $gallery3 = $row['image3'];
 
 <script>
     function isMovingToCart() {
+        var selectedIndex  = document.getElementById("size_select").selectedIndex ;
+        if (selectedIndex == 0) {
+            alert("옵션을 선택해주세요.")
+            return false;
+        }
+
         document.getElementById("is_moving_to_cart").value = confirm("장바구니로 이동하시겠습니까?");
+        return true;
     }
 </script>
 
@@ -114,7 +121,7 @@ $gallery3 = $row['image3'];
                                 </tbody>
                             </table>
 
-                            <form action="add_to_cart.php" method="post" onsubmit="isMovingToCart()">
+                            <form action="add_to_cart.php" method="post" onsubmit="return isMovingToCart();">
                                 <table class="table">
                                     <thead>
                                     </thead>
@@ -123,7 +130,7 @@ $gallery3 = $row['image3'];
                                             <span>사이즈</span>
                                         </th>
                                         <td>
-                                            <select class="form-select" name="size" aria-label="Default select example">
+                                            <select id="size_select" class="form-select" name="size" aria-label="Default select example">
                                                 <option selected>-[필수] 옵션을 선택해 주세요-</option>
                                                 <?php
                                                 while ($row = mysqli_fetch_array($result)) {
@@ -150,7 +157,7 @@ $gallery3 = $row['image3'];
                                     <input id="is_moving_to_cart" type="hidden" name="is_moving_to_cart" value="">
                                     <input type="hidden" name="item_id" value="<?= $itemId ?>">
                                     <!-- <input class="btn_3" type="submit" value="바로 구매"> -->
-                                    <input class="btn_3" type="submit" value="장바구니에 추가">
+                                    <input class="btn_3" type="submit" value="장바구니에 추가" onclick="isValid();">
                                 </div>
                             </form>
                         </div>

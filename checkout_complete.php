@@ -54,45 +54,6 @@ if (!$result) {
     mysqli_close($conn);
     die();
 }
-
-// $cartIds = $_POST['cart_ids'];
-// $cartIdSql = "1 != 1";
-
-// foreach ($cartIds as $cartId) {
-//     $cartIdSql = "$cartIdSql OR cart.id = $cartId";
-// }
-
-// $sql = "SELECT cart.id, cart.size, cart.quantity, cart.user_id, cart.item_id, item.image, item.school, item.name, item.sex, item.price FROM cart LEFT JOIN item ON item_id = item.id WHERE user_id = '$userId' AND ($cartIdSql)";
-// $result = mysqli_query($conn, $sql);
-
-// $totalPrice = 0;
-// $total_quantity = 0;
-// $deliveryCharge = 2500;
-// $paytype = "카카오페이";
-
-// while ($row = mysqli_fetch_array($result)) {
-//     $size = $row['size'];
-//     $quantity = $row['quantity'];
-//     $itemId = $row["item_id"];
-//     $itemImage = $row['image'];
-//     $itemSchool = $row['school'];
-//     $itemName = $row['name'];
-//     $itemPrice = $row['price'];
-//     $subtotal = $itemPrice * $quantity;
-//     $totalPrice += $subtotal;
-//     $total_quantity += $quantity;
-
-//     $sql2 = "INSERT INTO purchase_list (size, quantity, state, subtotal, delivery_charge, total_payment_amount, paytype, user_id, item_id) VALUES ($size, $quantity, '결제완료', $subtotal, $deliveryCharge, $totalPrice, '$paytype', '$userId', $itemId)";
-//     $result2 = mysqli_query($conn, $sql2);
-
-//     if (!$result2) {
-//         echo "<script>alert('실패');</script>";
-//         die();
-//     }
-// }
-
-// $result = mysqli_query($conn, $sql);
-
 ?>
 
 <main>
@@ -229,7 +190,7 @@ if (!$result) {
                 <br><br>
                 <div class="row justify-content-md-center">
                     <div class="col col-lg-2">
-                        <a class="col genric-btn danger" href="#" onclick="">마이페이지</a>
+                        <a class="col genric-btn danger" href="my_page.php" onclick="">마이페이지</a>
                     </div>
                     <div class="col col-lg-2">
                         <a class="col genric-btn primary" href="index.php">메인으로 이동</a>

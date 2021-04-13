@@ -1,5 +1,5 @@
 <?php
-    session_start();
+session_start();
 ?>
 
 <head>
@@ -90,59 +90,27 @@
                                             <li><a href="#">패션왕</a></li>
                                         </ul>
                                     </li>
-
-                                    <!-- <li><a href="index.php">home</a></li>
-                                    <li><a href="shop.html">shop</a></li>
-                                    <li><a href="about.html">about</a></li>
-                                    <li class="hot"><a href="#">Latest</a>
-                                        <ul class="submenu">
-                                            <li><a href="shop.html"> Product list</a></li>
-                                            <li><a href="product_details.html"> Product Details</a></li>
-                                        </ul>
-                                    </li>
-                                    <li><a href="blog.html">Blog</a>
-                                        <ul class="submenu">
-                                            <li><a href="blog.html">Blog</a></li>
-                                            <li><a href="blog-details.html">Blog Details</a></li>
-                                        </ul>
-                                    </li>
-                                    <li><a href="#">Pages</a>
-                                        <ul class="submenu">
-                                            <li><a href="login.php">Login</a></li>
-                                            <li><a href="cart.html">Cart</a></li>
-                                            <li><a href="elements.html">Element</a></li>
-                                            <li><a href="confirmation.html">Confirmation</a></li>
-                                            <li><a href="checkout.html">Product Checkout</a></li>
-                                        </ul>
-                                    </li>
-                                    <li><a href="contact.html">Contact</a></li> -->
                                 </ul>
                             </nav>
                         </div>
                         <!-- Header Right -->
                         <div class="header-right">
                             <ul>
-                                <!-- <li>
-                                    <div class="nav-search search-switch">
-                                        <span class="flaticon-search"></span>
-                                    </div>
-                                </li> -->
-
                                 <?php
-                                    if (isset($_SESSION['id'])) {
-                                        // 세션이 등록되어있습니다.
-                                        // 로그아웃
-                                        echo '<li> <a href="#"><span>';
-                                        echo $_SESSION['id'].'님';
-                                        echo '</span></a></li>';
-                                        echo '<li> <a href="logout.php"><span>로그아웃</span></a></li>';
-                                        echo '<li> <a href="#"><span class="flaticon-user"></span></a></li>';
-                                        echo '<li><a href="cart.php"><span class="flaticon-shopping-cart"></span></a> </li>';
-                                    } else {
-                                        // 세션이 등록되어 있지 않습니다.
-                                        // 로그인 화면
-                                        echo '<li> <a href="login.php"><span>로그인</span></a></li>';
-                                    }
+                                if (isset($_SESSION['id'])) {
+                                    // 세션이 등록되어있습니다.
+                                    // 로그아웃
+                                    echo '<li> <a href="#"><span>';
+                                    echo $_SESSION['id'] . '님';
+                                    echo '</span></a></li>';
+                                    echo '<li> <a href="logout.php"><span>로그아웃</span></a></li>';
+                                    echo '<li> <a href="my_page.php"><span class="flaticon-user"></span></a></li>';
+                                    echo '<li><a href="cart.php"><span class="flaticon-shopping-cart"></span></a> </li>';
+                                } else {
+                                    // 세션이 등록되어 있지 않습니다.
+                                    // 로그인 화면
+                                    echo '<li> <a href="login.php"><span>로그인</span></a></li>';
+                                }
                                 ?>
                             </ul>
                         </div>
