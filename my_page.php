@@ -184,9 +184,6 @@ $result = mysqli_query($conn, $sql);
                             <?php } ?>
                         </tbody>
                     </table>
-                    <?php
-
-                    ?>
                     <nav class="blog-pagination justify-content-center d-flex">
                         <ul class="pagination">
                             <!-- <?php if ($page != 1) { ?> -->

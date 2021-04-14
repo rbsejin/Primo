@@ -88,6 +88,15 @@ session_start();
                                             <li><a href="#">패션왕</a></li>
                                         </ul>
                                     </li>
+
+                                    <?php
+                                    if (isset($_SESSION['id'])) {
+                                        if ($_SESSION['id'] == "admin") {
+                                    ?>
+                                            <li><a href="product_manage.php">제품관리</a>
+                                            </li>
+                                    <?php }
+                                    } ?>
                                 </ul>
                             </nav>
                         </div>
