@@ -60,13 +60,13 @@ session_start();
                                         </ul>
                                     </li>
 
-                                    <li><a href="#">라인업</a>
+                                    <!-- <li><a href="#">라인업</a>
                                         <ul class="submenu">
                                             <li><a href="#">편한교복스타일</a></li>
                                             <li><a href="#">정장하복스타일</a></li>
                                             <li><a href="#">정장동복스타일</a></li>
                                         </ul>
-                                    </li>
+                                    </li> -->
 
                                     <li><a href="#">마켓</a>
                                         <ul class="submenu">
@@ -78,8 +78,6 @@ session_start();
                                     <li><a href="#">고객센터</a>
                                         <ul class="submenu">
                                             <li><a href="#">공지사항</a></li>
-                                            <li><a href="#">일정</a></li>
-                                            <li><a href="#">자주묻는질문</a></li>
                                             <li><a href="as.php">AS문의</a></li>
                                         </ul>
                                     </li>

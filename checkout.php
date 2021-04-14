@@ -121,6 +121,11 @@ $user = User::fromBasicDb($conn, $userId);
                 msg += '결제 금액 : ' + rsp.paid_amount;
                 msg += '카드 승인번호 : ' + rsp.apply_num;
 
+                document.getElementById('imp_uid').value = rsp.imp_uid;
+                document.getElementById('merchant_uid').value = rsp.merchant_uid;
+                document.getElementById('paid_amount').value = rsp.paid_amount;
+                document.getElementById('apply_num').value = rsp.apply_num;
+
                 var frmData = document.frmData;
                 frmData.action = "checkout_insert.php";
                 frmData.submit();
@@ -420,6 +425,11 @@ $user = User::fromBasicDb($conn, $userId);
             ?>
 
             <div>
+                <input type="hidden" id="imp_uid" name="imp_uid" value=""> 
+                <input type="hidden" id="merchant_uid" name="merchant_uid" value=""> 
+                <input type="hidden" id="paid_amount" name="paid_amount" value=""> 
+                <input type="hidden" id="apply_num" name="apply_num" value=""> 
+
                 <!-- CID -->
                 <input type="hidden" name="tid" value="<?= $tid ?>"> 
                 <!-- 주문번호 -->

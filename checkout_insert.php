@@ -37,8 +37,12 @@ $detailAddress = $_POST['detailAddress'];
 $extraAddress = $_POST["extraAddress"];
 // $totalAmount = $totalPrice + $deliveryCharge;
 
-$sql = "INSERT INTO pay_info (recipient, postcode, address, detail_address, extra_address, item_price, delivery_charge, total_price, paytype, user_id)
-VALUES ('$recipient', '$postcode', '$address', '$detailAddress', '$extraAddress', $totalPrice, $deliveryCharge, $totalAmount, '$paytype', '$userId')";
+$imp_uid = $_POST['imp_uid'];
+$merchant_uid = $_POST['merchant_uid'];
+$paid_amount = $_POST['paid_amount'];
+
+$sql = "INSERT INTO pay_info (recipient, postcode, address, detail_address, extra_address, item_price, delivery_charge, total_price, paytype, user_id, imp_uid, merchant_uid, paid_amount)
+VALUES ('$recipient', '$postcode', '$address', '$detailAddress', '$extraAddress', $totalPrice, $deliveryCharge, $totalAmount, '$paytype', '$userId', '$imp_uid', '$merchant_uid', $paid_amount)";
 $result2 = mysqli_query($conn, $sql);
 if (!$result2) {
     echo "<script>alert('실패');</script>";
