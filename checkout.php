@@ -411,7 +411,7 @@ $user = User::fromBasicDb($conn, $userId);
             </div>
             <div class="row justify-content-md-center">
                 <div class="col col-lg-2">
-                    <a class="col genric-btn primary" href="#" onclick="">취소</a>
+                    <a class="col genric-btn primary" href="cart.php" onclick="">취소</a>
                 </div>
                 <div class="col col-lg-2">
                     <a class="col genric-btn danger" href="#" onclick="checkOut('<?= $productName ?>', <?= $total_amount ?>, 'rbsejin@gmail.com', '이교복', '010-2702-2346', '서울시 강서구', '07725');">결제</a>

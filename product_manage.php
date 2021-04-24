@@ -37,8 +37,8 @@
     }
   }
 
-  function changeCartId(cartId) {
-    document.getElementById("cart_id").value = cartId;
+  function changeItemId(itemId) {
+    document.getElementById("item_id").value = itemId;
   }
 </script>
 
@@ -116,7 +116,7 @@ $result = mysqli_query($conn, $sql);
         <div class="row">
           <div class="col-xl-12">
             <div class="hero-cap text-center">
-              <h2>상품관리</h2>
+              <h2>제품관리</h2>
             </div>
           </div>
         </div>
@@ -167,13 +167,10 @@ $result = mysqli_query($conn, $sql);
                       <input id="all_checked" class="form-check-input" type="checkbox" value="" onclick="selectAll(this)" checked>상품정보
                     </div>
                   </th>
-                  <!-- <th scope="col">사이즈</th>
-                  <th scope="col">수량</th>
-                  <th scope="col">결제 금액</th> -->
                   <th scope="col">학교</th>
                   <th scope="col">상품명</th>
                   <th scope="col">상품금액</th>
-                  <th scope="col">선택</th>
+                  <th scope="col">수정</th>
                 </tr>
               </thead>
               <tbody>
@@ -212,33 +209,26 @@ $result = mysqli_query($conn, $sql);
                     </td>
                     <td>
                       <div class="media-body">
-                        <input type="text" name="name" value="<?= "$itemName" ?>" </p>
+                        <label> <?= $itemName ?> </label>
                       </div>
                     </td>
                     <td>
-                      <input type="text" name="itemPrice" value="<?= $itemPrice ?>" />
+                      <label> <?= $itemPrice ?> </label>
                     </td>
                     <td>
                       <div>
-                        <input class="genric-btn default" type="submit" value="삭제" onclick="changeCartId(<?= $cartId ?>)" formaction="delete_from_cart.php">
+                        <input class="genric-btn default" type="submit" value="삭제" onclick="changeItemId(<?= $itemId ?>)" formaction="delete_item.php">
+                        <input type="hidden" id="<?= $itemId ?>" name="item_id" value="">
                       </div>
                       <div style="margin-top: 10px;">
-                        <input class="genric-btn default" type="submit" value="변경" onclick="changeCartId(<?= $cartId ?>)" formaction="update_cart.php">
+                        <input class="genric-btn default" type="submit" value="변경" onclick="" formaction="update_item.php">
                       </div>
                     </td>
                   </tr>
                 <?php } ?>
 
-                <input id="cart_id" name="cart_id" type="hidden" value="">
-                <!-- 
-                <tr>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                </tr> -->
+                <input id="item_id" name="item_id" type="hidden" value="">
+                <input name="school" type="hidden" value="<?= $school ?>">
               </tbody>
             </table>
 
@@ -267,14 +257,6 @@ $result = mysqli_query($conn, $sql);
                 <?php } ?>
               </ul>
             </nav>
-            <br><br>
-            <!-- <form action="checkout.php" method="post"> -->
-            <div class="checkout_btn_inner float-right">
-              <button type="submit" class="btn_1" formaction="delete_from_cart_selected.php">선택 삭제</button>
-              <!-- <button type="submit" class="btn_1">선택 변경</button> -->
-              <!-- <button type="submit" class="btn_1" onclick="selectCheck()">전체상품 주문</button> -->
-              <a class="btn_1" href="market.php?sex=M&school=한빛고">상품 추가</a>
-            </div>
           </form>
         </div>
       </div>

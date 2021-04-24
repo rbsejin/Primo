@@ -45,7 +45,7 @@ if (!$conn) {
                         <a style="color: unset;" href="modify_pass.php">내 정보 변경</a>
                     </span>
                     <span>
-                        <a style="color: unset;" href="my_page.php">주문 조회</a>
+                        <a style="color: unset;" href="my_page.php">주문 목록</a>
                     </span>
                 </div>
             </div>
