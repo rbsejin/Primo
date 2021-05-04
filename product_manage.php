@@ -198,7 +198,7 @@ $result = mysqli_query($conn, $sql);
                           <input class="form-check-input" type="checkbox" name="cart_ids[]" value="<?= $itemId ?>" onClick="selectItem(this)" checked>
                         </div>
                         <div class="d-flex">
-                          <img src="assets/img/gallery/market/<?= $itemSchool . '/' . $itemImage ?>" alt="" />
+                          <img src="assets/img/gallery/market/<?= $itemImage ?>" alt="" />
                         </div>
                       </div>
                     </td>

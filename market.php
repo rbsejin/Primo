@@ -97,9 +97,9 @@ include_once('header.php');
                             $itemImage = $row['image'];
 
                             if ($itemImage == null) {
-                                $itemImage = 'assets/img/gallery/market/' . $school . '/hbh_hood.jpg';
+                                $itemImage = 'assets/img/gallery/market/default.jpg';
                             } else {
-                                $itemImage = 'assets/img/gallery/market/' . $school . '/' . $itemImage;
+                                $itemImage = 'assets/img/gallery/market/' . $itemImage;
                             }
 
                             $list = $list .

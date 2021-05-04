@@ -232,7 +232,7 @@ $user = User::fromBasicDb($conn, $userId);
                                         <td>
                                             <div class="media">
                                                 <div class="d-flex">
-                                                    <img src="assets/img/gallery/market/<?= "$itemSchool/$itemImage" ?>" alt="" />
+                                                    <img src="assets/img/gallery/market/<?= "$itemImage" ?>" alt="" />
                                                 </div>
                                                 <div class="media-body">
                                                     <p><?= "$productName" ?></p>
