@@ -6,9 +6,20 @@ $itemId = $_POST['item_id'];
 $name = $_POST['name'];
 $price = $_POST['price'];
 
-$productIds = $_POST['product_ids'];
-$sizes = $_POST['sizes'];
-$quantities = $_POST['quantities'];
+$productIds = [];
+if (!empty($_POST['product_ids'])) {
+    $productIds = $_POST['product_ids'];
+}
+
+$sizes = [];
+if (!empty($_POST['sizes'])) {
+    $sizes = $_POST['sizes'];
+}
+
+$quantities = [];
+if (!empty($_POST['quantities'])) {
+    $quantities = $_POST['quantities'];
+}
 
 $conn = mysqli_connect("127.0.0.1", "root", "vision9292!", "primo");
 if (!$conn) {
@@ -21,6 +32,9 @@ if ($item == null) {
     mysqli_close($conn);
     die();
 }
+
+
+$message = "";
 
 $target_dir = "../../assets/img/gallery/market/";
 $fileName = basename($_FILES["fileToUpload"]["name"]);
@@ -97,6 +111,7 @@ $result = mysqli_query($conn, $sql);
 
 if (!$result) {
     echo '실패';
+    $message = "실패";
     mysqli_close($conn);
 } else {
     // product table에서 사이즈-수량을 수정한다.
@@ -108,6 +123,7 @@ if (!$result) {
 
         if (!$result) {
             echo "사이즈 변경 실패";
+            $message = "사이즈 변경 실패";
         }
 
         $quantity = $quantities[$i];
@@ -116,6 +132,19 @@ if (!$result) {
 
         if (!$result) {
             echo "수량 변경 실패";
+            $message = "수량 변경 실패";
         }
     }
 }
+
+if ($message == "") {
+    $message = "저장했습니다.";
+}
+
+?>
+
+<script>
+    alert('<?= $message ?>');
+    window.location.replace('../products.php');
+    // window.location.replace('../products.php');
+</script>

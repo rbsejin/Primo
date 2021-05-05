@@ -3,12 +3,43 @@ include_once('../header.php');
 
 include_once('../Item.php');
 
-$itemId = $_POST['item_id'];
-
 $conn = mysqli_connect("127.0.0.1", "root", "vision9292!", "primo");
 if (!$conn) {
     echo 'db에 연결하지 못했습니다.' . mysqli_connect_error();
     die();
+}
+
+$itemId = "";
+$addSize = "";
+$removeSize = "";
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    if (!empty($_POST['item_id'])) {
+        $itemId = $_POST['item_id'];
+    }
+
+    if (!empty($_POST['add_size'])) {
+        $addSize = $_POST['add_size'];
+    }
+
+    if (!empty($_POST['remove_size'])) {
+        $removeSize = $_POST['remove_size'];
+    }
+}
+
+// 사이즈 버튼 클릭했을 때 사이즈 추가
+if ($addSize != "") {
+    $sql = "INSERT INTO product (size, quantity, item_id) SELECT $addSize, 0, $itemId WHERE NOT EXISTS(SELECT * FROM product WHERE item_id = $itemId AND size = $addSize)";
+    $result = mysqli_query($conn, $sql);
+}
+
+// 사이즈 삭제을 때 사이즈 삭제
+if ($removeSize != "") {
+    $sql = "DELETE FROM product WHERE size = $removeSize AND item_id = $itemId";
+    $result = mysqli_query($conn, $sql);
+
+    if (!$result) {
+        die();
+    }
 }
 
 $item = Item::fromBasicDb($conn, $itemId);
@@ -16,16 +47,13 @@ if ($item == null) {
     mysqli_close($conn);
     die();
 }
-
 $sql = "SELECT * FROM product WHERE item_id = $itemId ORDER BY size ASC";
 $result = mysqli_query($conn, $sql);
 
 if (!$result) {
-    mysqli_close($conn);
     die();
 }
 
-// $name = "{$item->school} {$item->name}";
 ?>
 
 
@@ -109,6 +137,26 @@ if (!$result) {
     }
 </style>
 
+<nav>
+    <ul>
+        <li>
+            <a href="../home.php">
+                홈
+            </a>
+        </li>
+        <li>
+            <a href="../orders.php">
+                주문
+            </a>
+        </li>
+        <li>
+            <a href="../products.php">
+                제품
+            </a>
+        </li>
+    </ul>
+</nav>
+
 <main>
     <form id="update" action="upload.php" method="post" enctype="multipart/form-data">
         <div>
@@ -145,6 +193,7 @@ if (!$result) {
             <!-- <button>이미지 복구</button> -->
             <input type="hidden" name="item_id" value=<?= $item->id ?>>
         </div>
+
         <div>
             <div id="sizes" class="hash_tag tag-container wrapper">
                 <!-- 여기에 사이즈 목록을 버튼으로 추가 -->
@@ -157,9 +206,16 @@ if (!$result) {
                 <?php } ?>
             </div>
             <div class="wrapper">
-                <input type="text" id="size" class="hash_tag" onkeypress="javascipt:if(event.keyCode==13) { addSize() }">
+                <input type="text" id="size" class="hash_tag">
+                <!-- <input type="text" id="size" class="hash_tag" onkeypress="javascipt:if(event.keyCode==13) { addSize() }"> -->
             </div>
+            <!-- <div>
+                <input type="text" value="">
+                <input type="submit" name_id value="사이즈추가" formaction="size_add.php">
+                <input type="hidden" name="item_id" value="<?= $itemId ?>">
+            </div> -->
         </div>
+
         <div id="size_div">
             <h6>사이즈</h6>
             <table id="sizeTable" class="table table-bordered table-hover text-center">
@@ -195,7 +251,13 @@ if (!$result) {
                 </tbody>
             </table>
         </div>
+        <br>
+
         <div>
+            <form action="delete.php">
+                <input type="button" value="삭제">
+                <input type="hidden" name="item_id" value="<?= $itemId ?>">
+            </form>
             <input type="button" value="저장" onclick="submitForm()">
         </div>
     </form>
@@ -226,28 +288,7 @@ if (!$result) {
             return false;
         }
 
-        // // 사이즈 버튼 추가
-        // var buttonHtml = "<span id='" + size + "'><span>" + size + "</span><button type='button' onClick='removeSize(" + sizeText + ")'>x</button></span>";
-        // $("#sizes").append(buttonHtml);
-
-        // 테이블 헤더 보이기
-        document.getElementById("size_div").style.display = "block";
-
-        // 테이블에 사이즈 추가
-        var trHtml = "<tr class='size_row'>" +
-            "<td>" +
-            "<input type='text' form='add' name='sizes[]' value='" + size + "'>" +
-            "</td>" +
-            "<td>" +
-            "<input type='number' form='add' name='quantities[]' value='0' min=0 style='width: 100px;'>" +
-            "</td>" +
-            "</tr>";
-
-        $("#sizeTbody").append(trHtml);
-
-        // document.getElementById("size").value = "";
-
-        return true;
+        return false;
     }
 
     var table = document.getElementById("sizeTable");
@@ -269,7 +310,11 @@ if (!$result) {
     }
 
     function submitForm() {
-        document.getElementById("add").submit();
+        document.getElementById("update").submit();
+    }
+
+    function submitFormDelete() {
+        document.getElementById("delete").submit();
     }
 
     // 해시태그
@@ -282,30 +327,27 @@ if (!$result) {
 
     input.addEventListener('keyup', () => {
         if (event.which == 13 && input.value.length > 0) {
-            var text = document.createTextNode(input.value);
+            // 사이즈 추가
+            const form = document.createElement('form');
+            form.method = "post";
+            form.action = "<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>"
 
-            var p = document.createElement('p');
-            container.appendChild(p);
-            p.appendChild(text);
-            p.classList.add('tag');
-            input.value = '';
+            params = {
+                item_id: '<?= $itemId ?>',
+                add_size: input.value
+            };
 
-            let deleteTags = document.querySelectorAll('.tag');
-            let deleteRows = document.querySelectorAll('.size_row');
-
-            for (let i = 0; i < deleteTags.length; i++) {
-                deleteTags[i].addEventListener('click', () => {
-                    try {
-                        container.removeChild(deleteTags[i]);
-                        tableBody.removeChild(deleteRows[i]);
-                    } catch (error) {
-                        console.log(error.name + ": " + error.message);
-                    }
-
-                    // 행이 하나도 없으면 테이블 헤더 숨기기
-                    hideTableHeader();
-                });
+            for (const key in params) {
+                if (params.hasOwnProperty(key)) {
+                    const hiddenField = document.createElement('input');
+                    hiddenField.type = 'hidden';
+                    hiddenField.name = key;
+                    hiddenField.value = params[key];
+                    form.appendChild(hiddenField);
+                }
             }
+            document.body.appendChild(form);
+            form.submit();
         }
     });
 
@@ -325,6 +367,28 @@ if (!$result) {
 
             // 행이 하나도 없으면 테이블 헤더 숨기기
             hideTableHeader();
+
+            //사이즈 삭제
+            const form = document.createElement('form');
+            form.method = "post";
+            form.action = "<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>"
+
+            params = {
+                item_id: '<?= $itemId ?>',
+                remove_size: deleteTags[i].innerHTML.toString()
+            };
+
+            for (const key in params) {
+                if (params.hasOwnProperty(key)) {
+                    const hiddenField = document.createElement('input');
+                    hiddenField.type = 'hidden';
+                    hiddenField.name = key;
+                    hiddenField.value = params[key];
+                    form.appendChild(hiddenField);
+                }
+            }
+            document.body.appendChild(form);
+            form.submit();
         });
     }
 
