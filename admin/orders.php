@@ -44,25 +44,15 @@ if (!$result) {
 
 ?>
 
-<nav>
-    <ul>
-        <li>
-            <a href="home.php">
-                홈
-            </a>
-        </li>
-        <li>
-            <a href="orders.php">
-                주문
-            </a>
-        </li>
-        <li>
-            <a href="products.php">
-                제품
-            </a>
-        </li>
-    </ul>
-</nav>
+<div class="properties__button">
+    <nav>
+        <div class="nav nav-tabs" id="nav-tab" role="tablist">
+            <a style="color: black;" class="nav-item nav-link" href="orders.php"> 주문 </a>
+            <a style="color: black;" class="nav-item nav-link" href="products.php"> 제품 </a>
+        </div>
+    </nav>
+    <br>
+</div>
 
 <main>
     <form action="" method="post">
@@ -152,18 +142,20 @@ if (!$result) {
                                 </form>
                             <?php } ?>
                             <div>
-                                <span>
-                                    <select id="state_select<?= $row['id'] ?>" onclick="change">
-                                        <option value="선택">선택</option>
-                                        <option value="취소">취소</option>
-                                        <option value="결제완료">결제완료</option>
-                                        <option value="발송중">발송중</option>
-                                        <option value="배송완료">배송완료</option>
-                                    </select>
-                                </span>
-                                <span>
-                                    <input type='submit' value="변경" onclick="changePurchase(<?= $payId ?>)" formaction="orders/update_state.php">
-                                </span>
+                                <div class="float-right">
+                                    <span style="margin-right: 10px;">
+                                        <select id="state_select<?= $row['id'] ?>" onclick="change">
+                                            <option value="선택">선택</option>
+                                            <option value="취소">취소</option>
+                                            <option value="결제완료">결제완료</option>
+                                            <option value="발송중">발송중</option>
+                                            <option value="배송완료">배송완료</option>
+                                        </select>
+                                    </span>
+                                    <span>
+                                        <input class="genric-btn default float-right" type='submit' value="변경" onclick="changePurchase(<?= $payId ?>)" formaction="orders/update_state.php">
+                                    </span>
+                                </div>
                             </div>
                         </td>
                     </tr>

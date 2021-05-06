@@ -48,35 +48,22 @@ if (empty($_GET['school']) || $_GET['school'] == "전체") {
 $result = mysqli_query($conn, $sql);
 ?>
 
-<nav>
-    <ul>
-        <li>
-            <a href="home.php">
-                홈
-            </a>
-        </li>
-        <li>
-            <a href="orders.php">
-                주문
-            </a>
-        </li>
-        <li>
-            <a href="products.php">
-                제품
-            </a>
-        </li>
-    </ul>
-</nav>
+<div class="properties__button">
+    <nav>
+        <div class="nav nav-tabs" id="nav-tab" role="tablist">
+            <a style="color: black;" class="nav-item nav-link" href="orders.php"> 주문 </a>
+            <a style="color: black;" class="nav-item nav-link" href="products.php"> 제품 </a>
+        </div>
+    </nav>
+    <br>
+</div>
 
 <main>
-    <div class="main_title">
+    <!-- <div class="main_title">
         <div>
             <h1>제품</h1>
         </div>
-        <div>
-            <a href="products/add.php">제품 추가</a>
-        </div>
-    </div>
+    </div> -->
     <div>
         <nav class="nav nav-tabs" id="nav-tab" role="tablist">
             <a href="products.php"> 전체 </a>
@@ -85,6 +72,18 @@ $result = mysqli_query($conn, $sql);
             <a href="products.php?school=한빛고"> 한빛고 </a>
             <a href="products.php?school=동패고"> 동패고 </a>
         </nav>
+    </div>
+    <div class="properties__button">
+        <nav>
+            <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                <a style="color: black;" class="nav-item nav-link" href="products.php"> 전체 </a>
+                <a style="color: black;" class="nav-item nav-link" href="products.php?school=운정중"> 운정중 </a>
+                <a style="color: black;" class="nav-item nav-link" href="products.php?school=한빛중"> 한빛중 </a>
+                <a style="color: black;" class="nav-item nav-link" href="products.php?school=한빛고"> 한빛고 </a>
+                <a style="color: black;" class="nav-item nav-link" href="products.php?school=동패고"> 동패고 </a>
+            </div>
+        </nav>
+        <br>
     </div>
     <div>
         <table id="example-table-1" class="table table-bordered table-hover text-center">
@@ -138,6 +137,9 @@ $result = mysqli_query($conn, $sql);
                 ?>
             </tbody>
         </table>
+    </div>
+    <div>
+        <a class="genric-btn primary float-right" href="products/add.php">제품 추가</a>
     </div>
     <nav class="blog-pagination justify-content-center d-flex">
         <ul class="pagination">

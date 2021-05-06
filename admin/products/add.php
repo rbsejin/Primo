@@ -1,5 +1,5 @@
 <?php
-include_once('../header.php');
+include_once('header.php');
 
 include_once('../Item.php');
 
@@ -29,7 +29,7 @@ if (!$conn) {
         margin: 0;
         width: 400px;
         /* background-color: #273c75; */
-        background-color: white;
+        background-color: honeydew;
         /* border-radius: 30px; */
         display: flex;
         /* align-items: center; */
@@ -90,105 +90,106 @@ if (!$conn) {
     }
 </style>
 
-<nav>
-    <ul>
-        <li>
-            <a href="../home.php">
-                홈
-            </a>
-        </li>
-        <li>
-            <a href="../orders.php">
-                주문
-            </a>
-        </li>
-        <li>
-            <a href="../products.php">
-                제품
-            </a>
-        </li>
-    </ul>
-</nav>
+<div class="properties__button">
+    <nav>
+        <div class="nav nav-tabs" id="nav-tab" role="tablist">
+            <a style="color: black;" class="nav-item nav-link" href="../orders.php"> 주문 </a>
+            <a style="color: black;" class="nav-item nav-link" href="../products.php"> 제품 </a>
+        </div>
+    </nav>
+    <br>
+</div>
 
 <main>
     <form id="add" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post" enctype="multipart/form-data">
-        <div>
-            <h6>학교</h6>
-            <select name="school" form="add">
-                <?php
-                $options = array('선택', '운정중', '한빛중', '한빛고', '동패고');
-
-                $output = '';
-                for ($i = 0; $i < count($options); $i++) {
-                    $output .= '<option>' . $options[$i] . '</option>';
-                }
-                echo $output;
-                ?>
-            </select>
-        </div>
-        <div>
-            <h6>품목명</h6>
-            <input type="text" name="name" value="">
-        </div>
-        <div>
-            <h6>성별</h6>
-            <input type="radio" name="sex" id="man" value="M">
-            <label for="man">남자</label>
-            <input type="radio" name="sex" id="woman" value="W">
-            <label for="woman">여자</label>
-            <input type="radio" name="sex" id="command" value="C">
-            <label for="command">공통</label>
-        </div>
-        <div>
-            <h6>가격</h6>
-            <input type="text" name="price" value="" maxlength="6">
-        </div>
-        <div>
-            <h6>이미지</h6>
-            <img class="preview" src="../../assets/img/gallery/market/default.jpg" height="180px">
-        </div>
-        <div>
-            변경할 이미지를 선택하세요:
-            <input type="file" name="fileToUpload" id="fileToUpload" accept="image/*">
-        </div>
-        <div>
-            <h6>사이즈 추가</h6>
-        </div>
-        <!-- <div style="border-style: groove; width: 405px; background-color: white;"> -->
-        <div>
-            <div id="sizes" class="hash_tag tag-container wrapper">
-                <!-- 여기에 사이즈 목록을 버튼으로 추가 -->
+        <div class="col-lg-6">
+            <div class="col-md-12">
+                <h6>학교</h6>
             </div>
-            <div class="wrapper">
-                <input type="text" id="size" class="hash_tag" onkeypress="javascipt:if(event.keyCode==13) { addSize() }">
-                <!-- <button type="button" onclick="addSize()">
+            <div class="col-md-12">
+                <select name="school" form="add">
+                    <?php
+                    $options = array('선택', '운정중', '한빛중', '한빛고', '동패고');
+
+                    $output = '';
+                    for ($i = 0; $i < count($options); $i++) {
+                        $output .= '<option>' . $options[$i] . '</option>';
+                    }
+                    echo $output;
+                    ?>
+                </select>
+            </div>
+            <br>
+            <br>
+            <br>
+            <div class="col-md-12">
+                <h6>품목명</h6>
+                <input type="text" name="name" value="">
+            </div>
+            <br>
+            <div class="col-md-12">
+                <h6>성별</h6>
+                <input type="radio" name="sex" id="man" value="M">
+                <label for="man">남자</label>
+                <input type="radio" name="sex" id="woman" value="W">
+                <label for="woman">여자</label>
+                <input type="radio" name="sex" id="command" value="C">
+                <label for="command">공통</label>
+            </div>
+            <br>
+            <div class="col-md-12">
+                <h6>가격</h6>
+                <input type="text" name="price" value="" maxlength="6">
+            </div>
+            <br>
+            <div class="col-md-12">
+                <h6>이미지</h6>
+                <img class="preview" src="../../assets/img/gallery/market/default.jpg" height="180px">
+            </div>
+            <div class="col-md-12">
+                변경할 이미지를 선택하세요: <br>
+                <input type="file" name="fileToUpload" id="fileToUpload" accept="image/*">
+            </div>
+            <br>
+            <div class="col-md-12">
+                <h6>사이즈 추가</h6>
+            </div>
+            <!-- <div style="border-style: groove; width: 405px; background-color: white;"> -->
+            <div>
+                <div id="sizes" class="hash_tag tag-container wrapper">
+                    <!-- 여기에 사이즈 목록을 버튼으로 추가 -->
+                </div>
+                <div class="wrapper col-md-12">
+                    <input style="background-color: honeydew;" type="text" id="size" class="hash_tag" onkeypress="javascipt:if(event.keyCode==13) { addSize() }">
+                    <!-- <button type="button" onclick="addSize()">
                     추가
                 </button> -->
+                </div>
             </div>
-        </div>
-        <div id="size_div" style="display: none;">
-            <h6>사이즈</h6>
-            <table id="sizeTable" class="table table-bordered table-hover text-center" style="width: 300px;">
-                <thead>
-                    <tr>
-                        <th style="width: 100px">
-                            사이즈
-                        </th>
-                        <th style="width: 100px;">
-                            수량
-                        </th>
-                    </tr>
-                </thead>
-                <tbody id="sizeTbody">
-                    <!-- 사이즈 행 추가 -->
-                </tbody>
-            </table>
-        </div>
-        <div style="height: 100px; border: green;">
-
-        </div>
-        <div>
-            <input type="button" value="추가" onclick="submitForm()">
+            <br>
+            <div id="size_div" style="display: none;">
+                <h6>사이즈</h6>
+                <table id="sizeTable" class="table table-bordered table-hover text-center" style="width: 300px;">
+                    <thead>
+                        <tr>
+                            <th style="width: 100px">
+                                사이즈
+                            </th>
+                            <th style="width: 100px;">
+                                수량
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody id="sizeTbody">
+                        <!-- 사이즈 행 추가 -->
+                    </tbody>
+                </table>
+            </div>
+            <!-- <div class="col-md-12" style="height: 100px; border: green;"> -->
+            <!-- </div> -->
+            <div class="col-md-12">
+                <input type="button" value="추가" onclick="submitForm()">
+            </div>
         </div>
     </form>
 </main>
@@ -305,7 +306,7 @@ if (!$conn) {
 </script>
 
 <?php
-include_once('../footer.php')
+include_once('footer.php')
 ?>
 
 <?php

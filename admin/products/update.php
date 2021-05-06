@@ -1,5 +1,5 @@
 <?php
-include_once('../header.php');
+include_once('header.php');
 
 include_once('../Item.php');
 
@@ -76,7 +76,7 @@ if (!$result) {
         margin: 0;
         width: 400px;
         /* background-color: #273c75; */
-        background-color: white;
+        background-color: honeydew;
         /* border-radius: 30px; */
         display: flex;
         /* align-items: center; */
@@ -137,128 +137,130 @@ if (!$result) {
     }
 </style>
 
-<nav>
-    <ul>
-        <li>
-            <a href="../home.php">
-                홈
-            </a>
-        </li>
-        <li>
-            <a href="../orders.php">
-                주문
-            </a>
-        </li>
-        <li>
-            <a href="../products.php">
-                제품
-            </a>
-        </li>
-    </ul>
-</nav>
+<div class="properties__button">
+    <nav>
+        <div class="nav nav-tabs" id="nav-tab" role="tablist">
+            <a style="color: black;" class="nav-item nav-link" href="../orders.php"> 주문 </a>
+            <a style="color: black;" class="nav-item nav-link" href="../products.php"> 제품 </a>
+        </div>
+    </nav>
+    <br>
+</div>
 
 <main>
     <form id="update" action="upload.php" method="post" enctype="multipart/form-data">
-        <div>
-            <h6>학교</h6>
-            <!-- <input type="select" name="school" value="<?= $item->school ?>"> -->
-            <select name="school" form="update">
-                <!-- <option value="운정중">운정중</option> -->
-                <?php
-                $options = array('운정중', '한빛중', '한빛고', '동패고');
-
-                $output = '';
-                for ($i = 0; $i < count($options); $i++) {
-                    $output .= '<option ' . ($item->school == $options[$i] ? 'selected="selected"' : '') . '>' . $options[$i] . '</option>';
-                }
-                echo $output;
-                ?>
-            </select>
-        </div>
-        <div>
-            <h6>품목명</h6>
-            <input type="text" name="name" value="<?= $item->name ?>">
-        </div>
-        <div>
-            <h6>가격</h6>
-            <input type="text" name="price" value="<?= $item->price ?>">
-        </div>
-        <div>
-            <h6>이미지</h6>
-            <img class="preview" src="../../assets/img/gallery/market/<?= "{$item->image}" ?>" height="180px">
-        </div>
-        <div>
-            변경할 이미지를 선택하세요:
-            <input type="file" name="fileToUpload" id="fileToUpload" accept="image/*">
-            <!-- <button>이미지 복구</button> -->
-            <input type="hidden" name="item_id" value=<?= $item->id ?>>
-        </div>
-
-        <div>
-            <div id="sizes" class="hash_tag tag-container wrapper">
-                <!-- 여기에 사이즈 목록을 버튼으로 추가 -->
-                <?php
-                $productSizes = [];
-                while ($row = mysqli_fetch_array($result)) {
-                    $productSize = $row['size'];
-                ?>
-                    <p class="tag"><?= $productSize ?></p>
-                <?php } ?>
+        <div class="col-lg-6">
+            <div class="col-md-12">
+                <h6>학교</h6>
             </div>
-            <div class="wrapper">
-                <input type="text" id="size" class="hash_tag">
-                <!-- <input type="text" id="size" class="hash_tag" onkeypress="javascipt:if(event.keyCode==13) { addSize() }"> -->
+            <div class="col-md-12">
+                <!-- <input type="select" name="school" value="<?= $item->school ?>"> -->
+                <select name="school" form="update">
+                    <!-- <option value="운정중">운정중</option> -->
+                    <?php
+                    $options = array('운정중', '한빛중', '한빛고', '동패고');
+
+                    $output = '';
+                    for ($i = 0; $i < count($options); $i++) {
+                        $output .= '<option ' . ($item->school == $options[$i] ? 'selected="selected"' : '') . '>' . $options[$i] . '</option>';
+                    }
+                    echo $output;
+                    ?>
+                </select>
             </div>
-            <!-- <div>
+            <br>
+            <br>
+            <br>
+            <div class="col-md-12">
+                <h6>품목명</h6>
+                <input type="text" name="name" value="<?= $item->name ?>">
+            </div>
+            <br>
+            <div class="col-md-12">
+                <h6>가격</h6>
+                <input type="text" name="price" value="<?= $item->price ?>">
+            </div>
+            <br>
+            <div class="col-md-12">
+                <h6>이미지</h6>
+                <img class="preview" src="../../assets/img/gallery/market/<?= "{$item->image}" ?>" height="180px">
+            </div>
+            <div class="col-md-12">
+                변경할 이미지를 선택하세요: <br>
+                <input type="file" name="fileToUpload" id="fileToUpload" accept="image/*">
+                <!-- <button>이미지 복구</button> -->
+                <input type="hidden" name="item_id" value=<?= $item->id ?>>
+            </div>
+            <br>
+            <div class="col-md-12">
+                <h6>사이즈 추가</h6>
+            </div>
+            <div>
+                <div id="sizes" class="hash_tag tag-container wrapper">
+                    <!-- 여기에 사이즈 목록을 버튼으로 추가 -->
+                    <?php
+                    $productSizes = [];
+                    while ($row = mysqli_fetch_array($result)) {
+                        $productSize = $row['size'];
+                    ?>
+                        <p class="tag"><?= $productSize ?></p>
+                    <?php } ?>
+                </div>
+                <div class="wrapper col-md-12">
+                    <input type="text" id="size" class="hash_tag" style="background-color: honeydew;">
+                    <!-- <input type="text" id="size" class="hash_tag" onkeypress="javascipt:if(event.keyCode==13) { addSize() }"> -->
+                </div>
+                <!-- <div>
                 <input type="text" value="">
                 <input type="submit" name_id value="사이즈추가" formaction="size_add.php">
                 <input type="hidden" name="item_id" value="<?= $itemId ?>">
             </div> -->
-        </div>
-
-        <div id="size_div">
-            <h6>사이즈</h6>
-            <table id="sizeTable" class="table table-bordered table-hover text-center">
-                <thead>
-                    <tr>
-                        <th>
-                            사이즈
-                        </th>
-                        <th>
-                            수량
-                        </th>
-                    </tr>
-                </thead>
-                <tbody id="sizeTbody">
-                    <?php
-                    $result = mysqli_query($conn, $sql);
-                    while ($row = mysqli_fetch_array($result)) {
-                        $productId = $row['id'];
-                        $productSize = $row['size'];
-                        $productQuantity = $row['quantity'];
-                    ?>
-
-                        <tr class="size_row">
-                            <td>
-                                <input type="hidden" form="update" name="product_ids[]" value="<?= $productId ?>">
-                                <input type='text' form='update' name='sizes[]' value='<?= $productSize ?>'>
-                            </td>
-                            <td>
-                                <input type='number' form='update' name='quantities[]' value='<?= $productQuantity ?>' min=0 style='width: 100px;'>
-                            </td>
+            </div>
+            <br>
+            <div id="size_div">
+                <h6>사이즈</h6>
+                <table id="sizeTable" class="table table-bordered table-hover text-center">
+                    <thead>
+                        <tr>
+                            <th>
+                                사이즈
+                            </th>
+                            <th>
+                                수량
+                            </th>
                         </tr>
-                    <?php } ?>
-                </tbody>
-            </table>
-        </div>
-        <br>
+                    </thead>
+                    <tbody id="sizeTbody">
+                        <?php
+                        $result = mysqli_query($conn, $sql);
+                        while ($row = mysqli_fetch_array($result)) {
+                            $productId = $row['id'];
+                            $productSize = $row['size'];
+                            $productQuantity = $row['quantity'];
+                        ?>
 
-        <div>
-            <form action="delete.php">
-                <input type="button" value="삭제">
-                <input type="hidden" name="item_id" value="<?= $itemId ?>">
-            </form>
-            <input type="button" value="저장" onclick="submitForm()">
+                            <tr class="size_row">
+                                <td>
+                                    <input type="hidden" form="update" name="product_ids[]" value="<?= $productId ?>">
+                                    <input type='text' form='update' name='sizes[]' value='<?= $productSize ?>'>
+                                </td>
+                                <td>
+                                    <input type='number' form='update' name='quantities[]' value='<?= $productQuantity ?>' min=0 style='width: 100px;'>
+                                </td>
+                            </tr>
+                        <?php } ?>
+                    </tbody>
+                </table>
+            </div>
+            <br>
+
+            <div>
+                <!-- <form action="delete.php">
+                    <input class="genric-btn primary float-right" type="button" value="삭제">
+                    <input type="hidden" name="item_id" value="<?= $itemId ?>">
+                </form> -->
+                <input class="genric-btn primary float-right" type="button" value="저장" onclick="submitForm()">
+            </div>
         </div>
     </form>
 </main>
@@ -401,6 +403,6 @@ if (!$result) {
 </script>
 
 <?php
-include_once('../footer.php');
+include_once('footer.php');
 mysqli_close($conn);
 ?>
