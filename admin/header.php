@@ -136,7 +136,7 @@ session_start();
                         <div class="main-menu d-none d-lg-block">
                             <nav>
                                 <ul id="navigation">
-                                    <li><a href="#">교하프리모소개</a>
+                                    <li><a href="../about.php">교하프리모소개</a>
                                         <!-- <ul class="submenu">
                                             <li><a href="#">편한교복</a></li>
                                             <li><a href="#">좋은품질</a></li>
