@@ -1,6 +1,10 @@
 <?php
 include_once('header.php');
 
+if (empty($_SESSION['id']) || $_SESSION['id'] != "admin") {
+    echo "<script>alert('관리자로 로그인하세요.');window.location.replace('../');;</script>";
+}
+
 // DB 연결
 $conn = mysqli_connect("127.0.0.1", "root", "vision9292!", "primo");
 if (!$conn) {

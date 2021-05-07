@@ -3,6 +3,10 @@ include_once('header.php');
 
 include_once('../Item.php');
 
+if (empty($_SESSION['id']) || $_SESSION['id'] != "admin") {
+    echo "<script>alert('관리자로 로그인하세요.');window.location.replace('../../');;</script>";
+}
+
 $conn = mysqli_connect("127.0.0.1", "root", "vision9292!", "primo");
 if (!$conn) {
     echo 'db에 연결하지 못했습니다.' . mysqli_connect_error();
