@@ -147,13 +147,13 @@ $result = mysqli_query($conn, $sql);
     </div>
     <nav class="blog-pagination justify-content-center d-flex">
         <ul class="pagination">
-            <!-- <?php if ($page != 1) { ?> -->
-            <!-- <li class="page-item"> -->
-            <!-- <a href="<?= "$PHP_SELP?{$getSchool}page=$prev_page" ?>" class="page-link" aria-label="Previous"> -->
-            <!-- 처음 -->
-            <!-- </a> -->
-            <!-- </li> -->
-            <!-- <?php } ?> -->
+            <?php if ($page != 1) { ?>
+                <li class="page-item">
+                    <a href="<?= "$PHP_SELP?{$getSchool}page=$prev_page" ?>" class="page-link" aria-label="Previous">
+                        처음
+                    </a>
+                </li>
+            <?php } ?>
             <?php if ($page != 1) { ?>
                 <li class="page-item">
                     <a href="<?= "$PHP_SELP?{$getSchool}page=" . max($page - 1, 1) ?>" class="page-link" aria-label="Previous">
@@ -175,13 +175,13 @@ $result = mysqli_query($conn, $sql);
                     </a>
                 </li>
             <?php } ?>
-            <!-- <?php if ($page != $page_count) { ?> -->
-            <!-- <li class="page-item"> -->
-            <!-- <a href="<?= "$PHP_SELP?{$getSchool}page=$next_page" ?>" class="page-link" aria-label="Next"> -->
-            <!-- 끝 -->
-            <!-- </a> -->
-            <!-- </li> -->
-            <!-- <?php } ?> -->
+            <?php if ($page != $page_count) { ?>
+                <li class="page-item">
+                    <a href="<?= "$PHP_SELP?{$getSchool}page=$next_page" ?>" class="page-link" aria-label="Next">
+                        끝
+                    </a>
+                </li>
+            <?php } ?>
         </ul>
     </nav>
 </main>

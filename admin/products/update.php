@@ -258,12 +258,10 @@ if (!$result) {
             </div>
             <br>
 
-            <div>
-                <!-- <form action="delete.php">
-                    <input class="genric-btn primary float-right" type="button" value="삭제">
-                    <input type="hidden" name="item_id" value="<?= $itemId ?>">
-                </form> -->
-                <input class="genric-btn primary float-right" type="button" value="저장" onclick="submitForm()">
+            <div class="col-md-12">
+                <input class="genric-btn primary" type="button" value="삭제" onclick="submitFormDelete()">
+                <input type="hidden" name="item_id" value="<?= $itemId ?>">
+                <input class="genric-btn primary" type="button" value="저장" onclick="submitForm()">
             </div>
         </div>
     </form>
@@ -320,7 +318,8 @@ if (!$result) {
     }
 
     function submitFormDelete() {
-        document.getElementById("delete").submit();
+        document.getElementById("update").action ="delete.php"
+        document.getElementById("update").submit();
     }
 
     // 해시태그
